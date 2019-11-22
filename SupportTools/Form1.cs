@@ -13,32 +13,31 @@ namespace SupportTools
 {
     public partial class Form1 : Form
     {
-
-
+        private Timer time = new Timer();
 
         public DatabaseManager ConectDB()
         {
 
-            DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\SQLEXPRESS;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;");
+            DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;Persist Security Info=True;User ID=sa;Initial Catalog=PersonalMed;");
+            //DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;User ID=sa;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;");
+
+
+            //"Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;"
+            //"Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;Persist Security Info=True;User ID=sa;Initial Catalog=PersonalMed;" providerName = "System.Data.SqlClient"
 
             return BancoConectado;
         }
-               
-
+             
         public Form1()
         {   
-            MessageBox.Show("ANTES DE REALIZAR A EXCLUSÃO FAÇA UM BKP!");
+        //    MessageBox.Show("ANTES DE REALIZAR A EXCLUSÃO FAÇA UM BKP!");
             InitializeComponent();
             AtualizarCombo();
             
         }
 
-
-
         private void AtualizarCombo()
         {
-
-
             var us01Items = ConectDB().GetDatable("select * from us01 where usertype = 'M'");
 
             comboBox1.DataSource = us01Items;
@@ -108,7 +107,7 @@ namespace SupportTools
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void DAT005(object sender, EventArgs e)
         {
             try
             {
@@ -164,7 +163,7 @@ namespace SupportTools
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void UPDATE_TUSS(object sender, EventArgs e)
         {
             //DatabaseManager db = new DatabaseManager("Data Source=localhost\\SQLEXPRESS;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;");
             try
@@ -5890,124 +5889,174 @@ namespace SupportTools
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //DatabaseManager db = new DatabaseManager("Data Source=localhost\\SQLEXPRESS;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;");
-            try
-            {   // primeira parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE AGE011_PRECADASTRO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE AGE02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE AGE03 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //segunda parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE AGE04 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE AGE05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE AMB90 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //terceira parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE AMB92 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE AMB96 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE CARRIER SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //quarta parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE CFG01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE CIEFAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE CLINI_01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //quinta parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE CLINI_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE CLINI_05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE CO12_1 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //sexta parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE CO12_2 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE CO25 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE CO28 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //setima parte
-               ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE CONTA_MATERIAIS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE CONTA_MEDICAMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE CONTA_PACIENTE SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //oitava parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE CONTA_PACOTES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE CONTA_PROCEDIMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE CONTA_PROCEDIMENTOS_PROFISSIONAL SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //nona parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE CONTA_TAXAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE FIN_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE FIN_51 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //decima parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE FUNCOES_REPASSES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE LOCAL_ATENDIMENTO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE ME SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //11 parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE PROPTB_TUSS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE PROPTB59 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE PROPTB60 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //12 parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE PROPTB61 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE PROPTB62 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE PROPTB63 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //13 parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE PROPTB64 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE PROPTB65 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE SYS011 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //14 parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE SYS084 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE SYS099 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                UPDATE TISS009 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                commit transaction;");
-                //15 parte
-                ConectDB().ExecuteNonQueries($@"
-                begin transaction;
-                UPDATE SYS103 SET CLOUD_SYNC_ID = null;
-                UPDATE TUSS001_TUSS SET CLOUD_SYNC_ID = null;
-                commit transaction;");
-                MessageBox.Show("Concluido");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Execute mais uma vez");
-            }
+        //private void RESET_NUVEM(object sender, EventArgs e)
+        //{
 
+        //    try
+        //    {   // primeira parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE AGE011_PRECADASTRO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE AGE02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE AGE03 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //segunda parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE AGE04 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE AGE05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE AMB90 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //terceira parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE AMB92 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE AMB96 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE CARRIER SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //quarta parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE CFG01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE CIEFAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE CLINI_01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //quinta parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE CLINI_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE CLINI_05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE CO12_1 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //sexta parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE CO12_2 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE CO25 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE CO28 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //setima parte
+        //       ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE CONTA_MATERIAIS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE CONTA_MEDICAMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE CONTA_PACIENTE SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //oitava parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE CONTA_PACOTES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE CONTA_PROCEDIMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE CONTA_PROCEDIMENTOS_PROFISSIONAL SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //nona parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE CONTA_TAXAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE FIN_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE FIN_51 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //decima parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE FUNCOES_REPASSES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE LOCAL_ATENDIMENTO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE ME SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //11 parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE PROPTB_TUSS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE PROPTB59 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE PROPTB60 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //12 parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE PROPTB61 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE PROPTB62 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE PROPTB63 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //13 parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE PROPTB64 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE PROPTB65 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE SYS011 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //14 parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE SYS084 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE SYS099 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        UPDATE TISS009 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        //15 parte
+        //        ConectDB().ExecuteNonQueries($@"
+        //        begin transaction;
+        //        UPDATE SYS103 SET CLOUD_SYNC_ID = null;
+        //        UPDATE TUSS001_TUSS SET CLOUD_SYNC_ID = null;
+        //        commit transaction;");
+        //        MessageBox.Show("Concluido");
+        //    }
+        //    catch (Exception)
+        //    {
+        //        MessageBox.Show("Execute mais uma vez");
+        //    }
+
+        //}
+
+        private void RESET_NUVEM(object sender, EventArgs e)
+        {
+            ConectDB().ExecuteNonQueries($@"DELETE FROM RESUMO_PMED;
+                                        UPDATE CLINI_05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE AMB90 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE AMB92 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE AMB96 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CIEFAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE PROPTB_TUSS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE PROPTB59 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE PROPTB60 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE PROPTB61 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE PROPTB62 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE PROPTB63 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE PROPTB64 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE PROPTB65 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE AGE011_PRECADASTRO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE AGE02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE AGE03 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE AGE04 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE AGE05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CARRIER SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CFG01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CLINI_01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CLINI_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CO12_1 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CO12_2 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CO25 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CO28 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CONTA_MATERIAIS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CONTA_MEDICAMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CONTA_PACIENTE SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CONTA_PACOTES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CONTA_PROCEDIMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CONTA_PROCEDIMENTOS_PROFISSIONAL SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE CONTA_TAXAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE FIN_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE FIN_51 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE FUNCOES_REPASSES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE LOCAL_ATENDIMENTO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE ME SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE SYS011 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE SYS084 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE SYS099 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE TISS009 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                        UPDATE SYS103 SET CLOUD_SYNC_ID = null;
+                                        UPDATE TUSS001_TUSS SET CLOUD_SYNC_ID = null;"
+            );
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void DELETE_RESUMO_LOCK(object sender, EventArgs e)
         {
             //DatabaseManager db = new DatabaseManager("Data Source=localhost\\SQLEXPRESS;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;");
             try
@@ -6022,8 +6071,6 @@ namespace SupportTools
                 MessageBox.Show("Execute mais uma vez");
             }
         }
-
-
 
         private void rbApagar_CheckedChanged(object sender, EventArgs e)
         {
@@ -6040,37 +6087,39 @@ namespace SupportTools
 
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void DelataAgendamentosDuplicados(object sender, EventArgs e)
         {
-            try
-            {
-                ConectDB().ExecuteNonQueries($@"
-                DELETE FROM AGE03 WHERE AGE03_ID IN (
-                select AGE03.AGE03_ID from age03 inner join
-                (select data,inicio,usernumber, COUNT(*) AS C from AGE03
-                where ATIVO = 'T' and ativo = 'F'
-                group by DATA,INICIO,USERNUMBER
-                having COUNT (*) > 1) duplicatas 
 
-                on age03.DATA = duplicatas.DATA 
-                AND AGE03.INICIO = duplicatas.INICIO 
-                AND AGE03.USERNUMBER = duplicatas.USERNUMBER
-                WHERE
-                AGE03.ATIVO='T'and age03.ATIVO='F')");
-                MessageBox.Show("Deletados");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Execute mais uma vez");
-            }
-            finally
-            {
-                comboBox2.SelectedIndex = -1;
-                AtualizarCombo();
-            }
+            groupBox2.Visible = false;
+            //try
+            //{
+            //    ConectDB().ExecuteNonQueries($@"
+            //    DELETE FROM AGE03 WHERE AGE03_ID IN (
+            //    select AGE03.AGE03_ID from age03 inner join
+            //    (select data,inicio,usernumber, COUNT(*) AS C from AGE03
+            //    where ATIVO = 'T' and ativo = 'F'
+            //    group by DATA,INICIO,USERNUMBER
+            //    having COUNT (*) > 1) duplicatas 
+
+            //    on age03.DATA = duplicatas.DATA 
+            //    AND AGE03.INICIO = duplicatas.INICIO 
+            //    AND AGE03.USERNUMBER = duplicatas.USERNUMBER
+            //    WHERE
+            //    AGE03.ATIVO='T'and age03.ATIVO='F')");
+            //    MessageBox.Show("Deletados");
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Execute mais uma vez");
+            //}
+            //finally
+            //{
+            //    comboBox2.SelectedIndex = -1;
+            //    AtualizarCombo();
+            //}
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void DeletaAgendamentosAge04(object sender, EventArgs e)
         {
             
             try
@@ -6089,8 +6138,7 @@ namespace SupportTools
             }
         }
 
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private void CorrigeCpfDuplicado(object sender, EventArgs e)
         {
             
             try
@@ -6124,7 +6172,7 @@ namespace SupportTools
 
         }
 
-        private void btApagaMedico_Click(object sender, EventArgs e)
+        private void DeletarMedico(object sender, EventArgs e)
         {
             
             var profUserNumber = comboBox1.SelectedValue;
@@ -6170,7 +6218,7 @@ namespace SupportTools
             AtualizarCombo();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void ADD_COLUMN_CO19_CLOUD_SYNC_DATE(object sender, EventArgs e)
         {
             try
             {
@@ -6186,7 +6234,7 @@ namespace SupportTools
             }
         }
 
-        private void button3_Click_1(object sender, EventArgs e)
+        private void ADD_COLUMN_CO50_CLOUD_SYNC_DATE(object sender, EventArgs e)
         {
             try
             {
@@ -6202,7 +6250,7 @@ namespace SupportTools
             }
         }
 
-        private void button4_Click_1(object sender, EventArgs e)
+        private void ADD_COLUMN_CO19_CLOUD_SYNC_ID(object sender, EventArgs e)
         {
             try
             {
@@ -6219,7 +6267,7 @@ namespace SupportTools
             }
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void ADD_COLUMN_CO50_CLOUD_SYNC_ID(object sender, EventArgs e)
         {
             try
             {
@@ -6235,7 +6283,7 @@ namespace SupportTools
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void ADD_COLUMN_CO51_CLOUD_SYNC_DATE(object sender, EventArgs e)
         {
             try
             {
@@ -6257,7 +6305,7 @@ namespace SupportTools
 
         }
 
-        private void button7_Click_1(object sender, EventArgs e)
+        private void ADD_COLUMN_CO51_CLOUD_SYNC_ID(object sender, EventArgs e)
         {
             try
             {
@@ -6279,7 +6327,7 @@ namespace SupportTools
 
         }
 
-        private void button8_Click_1(object sender, EventArgs e)
+        private void DROP_AND_CREATE_NEW_DAT005(object sender, EventArgs e)
         {
             try
             {
@@ -6320,7 +6368,7 @@ namespace SupportTools
             }
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void INSERT_NEW_DAT005(object sender, EventArgs e)
         {
             try
             {
@@ -6593,7 +6641,7 @@ namespace SupportTools
             }
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void REPAIR_DAT005(object sender, EventArgs e)
         {
             try
             {
@@ -6641,7 +6689,7 @@ namespace SupportTools
 
         }
 
-        private void button5_Click_1(object sender, EventArgs e)
+        private void ListaCpfComCaracterEspecial(object sender, EventArgs e)
         {
             try
             {
@@ -6657,7 +6705,7 @@ namespace SupportTools
             }
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void ListaCpfMaiorQue11Caracteres(object sender, EventArgs e)
         {
             try
             {
@@ -6672,6 +6720,64 @@ namespace SupportTools
                 MessageBox.Show("NÃO EXECUTADO!");
             }
             
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //InitializeProgressBar();
+            progressBar1.Maximum = 17;
+
+            btApagarDuplicados.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            btApagarAge04.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            button5.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            button11.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            btCo19Date.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            button4.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            button3.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            button2.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            button6.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            button7.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            button8.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            button9.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            button10.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            btDat005.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            btUpdateTuss.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            btResetNuvem.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            btDeleteResumo.PerformClick();
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
         }
     }
 

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.btDeleteResumo = new System.Windows.Forms.Button();
             this.btResetNuvem = new System.Windows.Forms.Button();
@@ -56,19 +55,29 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btApagaMedico = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.btApagarAge04 = new System.Windows.Forms.Button();
             this.btApagarDuplicados = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabPage5.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,7 +99,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(638, 293);
+            this.tabPage5.Size = new System.Drawing.Size(638, 648);
             this.tabPage5.TabIndex = 5;
             this.tabPage5.Text = "12.1.16 SCRIPTS SINCRONISMO";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -103,7 +112,7 @@
             this.btDeleteResumo.TabIndex = 30;
             this.btDeleteResumo.Text = "DELETE RESUMO\\LOCK";
             this.btDeleteResumo.UseVisualStyleBackColor = true;
-            this.btDeleteResumo.Click += new System.EventHandler(this.button4_Click);
+            this.btDeleteResumo.Click += new System.EventHandler(this.DELETE_RESUMO_LOCK);
             // 
             // btResetNuvem
             // 
@@ -113,7 +122,7 @@
             this.btResetNuvem.TabIndex = 29;
             this.btResetNuvem.Text = "RESET NUVEM";
             this.btResetNuvem.UseVisualStyleBackColor = true;
-            this.btResetNuvem.Click += new System.EventHandler(this.button3_Click);
+            this.btResetNuvem.Click += new System.EventHandler(this.RESET_NUVEM);
             // 
             // btUpdateTuss
             // 
@@ -123,7 +132,7 @@
             this.btUpdateTuss.TabIndex = 28;
             this.btUpdateTuss.Text = "UPDATE TUSS";
             this.btUpdateTuss.UseVisualStyleBackColor = true;
-            this.btUpdateTuss.Click += new System.EventHandler(this.button2_Click);
+            this.btUpdateTuss.Click += new System.EventHandler(this.UPDATE_TUSS);
             // 
             // btDat005
             // 
@@ -133,7 +142,7 @@
             this.btDat005.TabIndex = 27;
             this.btDat005.Text = "DAT005";
             this.btDat005.UseVisualStyleBackColor = true;
-            this.btDat005.Click += new System.EventHandler(this.button1_Click);
+            this.btDat005.Click += new System.EventHandler(this.DAT005);
             // 
             // button10
             // 
@@ -143,7 +152,7 @@
             this.button10.TabIndex = 16;
             this.button10.Text = "REPAIR DAT005";
             this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.button10.Click += new System.EventHandler(this.REPAIR_DAT005);
             // 
             // button9
             // 
@@ -153,7 +162,7 @@
             this.button9.TabIndex = 15;
             this.button9.Text = "INSERT NEW_DAT005";
             this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.button9.Click += new System.EventHandler(this.INSERT_NEW_DAT005);
             // 
             // button8
             // 
@@ -163,7 +172,7 @@
             this.button8.TabIndex = 14;
             this.button8.Text = "DROP AND CREATE NEW_DAT005";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click_1);
+            this.button8.Click += new System.EventHandler(this.DROP_AND_CREATE_NEW_DAT005);
             // 
             // button7
             // 
@@ -173,7 +182,7 @@
             this.button7.TabIndex = 13;
             this.button7.Text = "ADD COLUMN CO51 CLOUD SYNC ID";
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click_1);
+            this.button7.Click += new System.EventHandler(this.ADD_COLUMN_CO51_CLOUD_SYNC_ID);
             // 
             // button6
             // 
@@ -183,7 +192,7 @@
             this.button6.TabIndex = 12;
             this.button6.Text = "ADD COLUMN CO51 CLOUD SYNC DATE";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.Click += new System.EventHandler(this.ADD_COLUMN_CO51_CLOUD_SYNC_DATE);
             // 
             // button2
             // 
@@ -193,7 +202,7 @@
             this.button2.TabIndex = 11;
             this.button2.Text = "ADD COLUMN CO50 CLOUD SYNC ID";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.button2.Click += new System.EventHandler(this.ADD_COLUMN_CO50_CLOUD_SYNC_ID);
             // 
             // button3
             // 
@@ -203,7 +212,7 @@
             this.button3.TabIndex = 10;
             this.button3.Text = "ADD COLUMN CO50 CLOUD SYNC DATE";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            this.button3.Click += new System.EventHandler(this.ADD_COLUMN_CO50_CLOUD_SYNC_DATE);
             // 
             // button4
             // 
@@ -213,7 +222,7 @@
             this.button4.TabIndex = 9;
             this.button4.Text = "ADD COLUMN CO19 CLOUD SYNC ID";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            this.button4.Click += new System.EventHandler(this.ADD_COLUMN_CO19_CLOUD_SYNC_ID);
             // 
             // btCo19Date
             // 
@@ -223,7 +232,7 @@
             this.btCo19Date.TabIndex = 8;
             this.btCo19Date.Text = "ADD COLUMN CO19 CLOUD SYNC DATE";
             this.btCo19Date.UseVisualStyleBackColor = true;
-            this.btCo19Date.Click += new System.EventHandler(this.button5_Click);
+            this.btCo19Date.Click += new System.EventHandler(this.ADD_COLUMN_CO19_CLOUD_SYNC_DATE);
             // 
             // tabPage4
             // 
@@ -235,7 +244,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(638, 293);
+            this.tabPage4.Size = new System.Drawing.Size(638, 648);
             this.tabPage4.TabIndex = 4;
             this.tabPage4.Text = "CPF Duplicado";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -266,7 +275,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "CORRIGIR CPF";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.CorrigeCpfDuplicado);
             // 
             // comboBox4
             // 
@@ -292,7 +301,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(638, 293);
+            this.tabPage2.Size = new System.Drawing.Size(638, 648);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "Deletar Médico";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -348,10 +357,14 @@
             this.btApagaMedico.TabIndex = 2;
             this.btApagaMedico.Text = "APAGAR MÉDICO";
             this.btApagaMedico.UseVisualStyleBackColor = true;
-            this.btApagaMedico.Click += new System.EventHandler(this.btApagaMedico_Click);
+            this.btApagaMedico.Click += new System.EventHandler(this.DeletarMedico);
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.groupBox2);
+            this.tabPage3.Controls.Add(this.label5);
+            this.tabPage3.Controls.Add(this.label4);
+            this.tabPage3.Controls.Add(this.label3);
             this.tabPage3.Controls.Add(this.button11);
             this.tabPage3.Controls.Add(this.button5);
             this.tabPage3.Controls.Add(this.comboBox6);
@@ -362,10 +375,112 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(638, 293);
+            this.tabPage3.Size = new System.Drawing.Size(638, 648);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Agendamento Duplicado";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.progressBar1);
+            this.groupBox2.Controls.Add(this.button13);
+            this.groupBox2.Controls.Add(this.button12);
+            this.groupBox2.Location = new System.Drawing.Point(159, 235);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(310, 159);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(24, 114);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(251, 15);
+            this.progressBar1.TabIndex = 2;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(179, 51);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(96, 33);
+            this.button13.TabIndex = 1;
+            this.button13.Text = "No Execute all";
+            this.button13.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(24, 51);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(97, 33);
+            this.button12.TabIndex = 0;
+            this.button12.Text = "Execute all";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(455, 11);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(105, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Lista Cpf > 11 digitos";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(257, 11);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(147, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Lista Cpf-Caracteres  especial";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(153, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Lista Compromissos duplicados";
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(458, 67);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(174, 30);
+            this.button11.TabIndex = 6;
+            this.button11.Text = "Execultar correção";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.ListaCpfMaiorQue11Caracteres);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(260, 67);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(174, 30);
+            this.button5.TabIndex = 5;
+            this.button5.Text = "Execultar correção";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.ListaCpfComCaracterEspecial);
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(458, 30);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(174, 21);
+            this.comboBox6.TabIndex = 4;
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(260, 30);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(174, 21);
+            this.comboBox5.TabIndex = 3;
             // 
             // comboBox2
             // 
@@ -377,13 +492,13 @@
             // 
             // btApagarAge04
             // 
-            this.btApagarAge04.Location = new System.Drawing.Point(6, 96);
+            this.btApagarAge04.Location = new System.Drawing.Point(6, 103);
             this.btApagarAge04.Name = "btApagarAge04";
             this.btApagarAge04.Size = new System.Drawing.Size(223, 30);
             this.btApagarAge04.TabIndex = 1;
             this.btApagarAge04.Text = "DELETAR AGENDAMENTO AGE04";
             this.btApagarAge04.UseVisualStyleBackColor = true;
-            this.btApagarAge04.Click += new System.EventHandler(this.button8_Click);
+            this.btApagarAge04.Click += new System.EventHandler(this.DeletaAgendamentosAge04);
             // 
             // btApagarDuplicados
             // 
@@ -393,7 +508,7 @@
             this.btApagarDuplicados.TabIndex = 0;
             this.btApagarDuplicados.Text = "DELETAR AGENDAMENTO DUPLICADO";
             this.btApagarDuplicados.UseVisualStyleBackColor = true;
-            this.btApagarDuplicados.Click += new System.EventHandler(this.button7_Click);
+            this.btApagarDuplicados.Click += new System.EventHandler(this.DelataAgendamentosDuplicados);
             // 
             // tabControl1
             // 
@@ -404,50 +519,23 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(646, 319);
+            this.tabControl1.Size = new System.Drawing.Size(646, 674);
             this.tabControl1.TabIndex = 0;
             // 
-            // comboBox5
+            // label6
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(260, 30);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(174, 21);
-            this.comboBox5.TabIndex = 3;
-            // 
-            // comboBox6
-            // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(458, 30);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(174, 21);
-            this.comboBox6.TabIndex = 4;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(260, 67);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(174, 30);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "AJUSTAS";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click_1);
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(458, 67);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(174, 30);
-            this.button11.TabIndex = 6;
-            this.button11.Text = "AJUSTAS";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(21, 98);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "label6";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(741, 369);
+            this.ClientSize = new System.Drawing.Size(665, 754);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Tools";
@@ -458,23 +546,16 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button btCo19Date;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -492,14 +573,32 @@
         private System.Windows.Forms.Button btApagarAge04;
         private System.Windows.Forms.Button btApagarDuplicados;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.Button btDeleteResumo;
-        private System.Windows.Forms.Button btResetNuvem;
-        private System.Windows.Forms.Button btUpdateTuss;
-        private System.Windows.Forms.Button btDat005;
         private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.ComboBox comboBox6;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btDeleteResumo;
+        private System.Windows.Forms.Button btResetNuvem;
+        private System.Windows.Forms.Button btUpdateTuss;
+        private System.Windows.Forms.Button btDat005;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btCo19Date;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }
 

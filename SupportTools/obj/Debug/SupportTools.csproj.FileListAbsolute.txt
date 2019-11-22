@@ -27,3 +27,13 @@ C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTool
 C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTools\SupportTools\bin\Debug\SupportTools.exe
 C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTools\SupportTools\bin\Debug\SupportTools.pdb
 C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTools\SupportTools\obj\Debug\SupportTools.csprojResolveAssemblyReference.cache
+C:\Projeto Fabiano\SupportDevTools\SupportTools\bin\Debug\SupportTools.exe.config
+C:\Projeto Fabiano\SupportDevTools\SupportTools\bin\Debug\SupportTools.exe
+C:\Projeto Fabiano\SupportDevTools\SupportTools\bin\Debug\SupportTools.pdb
+C:\Projeto Fabiano\SupportDevTools\SupportTools\obj\Debug\SupportTools.csprojAssemblyReference.cache
+C:\Projeto Fabiano\SupportDevTools\SupportTools\obj\Debug\SupportTools.Form1.resources
+C:\Projeto Fabiano\SupportDevTools\SupportTools\obj\Debug\SupportTools.Properties.Resources.resources
+C:\Projeto Fabiano\SupportDevTools\SupportTools\obj\Debug\SupportTools.csproj.GenerateResource.cache
+C:\Projeto Fabiano\SupportDevTools\SupportTools\obj\Debug\SupportTools.csproj.CoreCompileInputs.cache
+C:\Projeto Fabiano\SupportDevTools\SupportTools\obj\Debug\SupportTools.exe
+C:\Projeto Fabiano\SupportDevTools\SupportTools\obj\Debug\SupportTools.pdb

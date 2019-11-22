@@ -32,14 +32,21 @@ namespace SupportDataBase
         }
 
 
-        public void ExecuteNonQueries(string Query_)
+        public async void ExecuteNonQueries(string Query_)
         {
-            OpenConection();
-
             SqlCommand cmd = new SqlCommand(Query_, con);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                OpenConection();
 
-            CloseConnection();
+                await cmd.ExecuteNonQueryAsync();
+
+                CloseConnection();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
 
@@ -63,16 +70,23 @@ namespace SupportDataBase
 
         public DataTable GetDatable(string Query_)
         {
-            OpenConection();
+            try
+            {
+                OpenConection();
 
-            SqlDataAdapter dr = new SqlDataAdapter(Query_, ConnectionString);
-            DataSet ds = new DataSet();
-            dr.Fill(ds);
-            DataTable dataum = ds.Tables[0];
+                SqlDataAdapter dr = new SqlDataAdapter(Query_, ConnectionString);
+                DataSet ds = new DataSet();
+                dr.Fill(ds);
+                DataTable dataum = ds.Tables[0];
 
-            CloseConnection();
+                CloseConnection();
 
-            return dataum;
+                return dataum;
+            }
+            catch (Exception ex)
+            {
+                throw(ex);
+            }
         }
                
        
