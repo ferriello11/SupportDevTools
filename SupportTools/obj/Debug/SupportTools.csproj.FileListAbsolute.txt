@@ -1,0 +1,29 @@
+C:\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\bin\Debug\SupportTools.exe.config
+C:\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\bin\Debug\SupportTools.exe
+C:\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\bin\Debug\SupportTools.pdb
+C:\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.csprojAssemblyReference.cache
+C:\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.Form1.resources
+C:\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.Properties.Resources.resources
+C:\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.csproj.GenerateResource.cache
+C:\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.csproj.CoreCompileInputs.cache
+C:\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.exe
+C:\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.pdb
+\\POAN040100848\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.csprojAssemblyReference.cache
+\\POAN040100848\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.Form1.resources
+\\POAN040100848\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.Properties.Resources.resources
+\\POAN040100848\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.csproj.GenerateResource.cache
+\\POAN040100848\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.csproj.CoreCompileInputs.cache
+\\POAN040100848\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.exe
+\\POAN040100848\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\obj\Debug\SupportTools.pdb
+\\POAN040100848\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\bin\Debug\SupportTools.exe.config
+\\POAN040100848\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\bin\Debug\SupportTools.exe
+\\POAN040100848\Users\fabiano.faleiro\source\repos\SupportTools\SupportTools\bin\Debug\SupportTools.pdb
+C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTools\SupportTools\obj\Debug\SupportTools.Form1.resources
+C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTools\SupportTools\obj\Debug\SupportTools.Properties.Resources.resources
+C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTools\SupportTools\obj\Debug\SupportTools.csproj.GenerateResource.cache
+C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTools\SupportTools\obj\Debug\SupportTools.exe
+C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTools\SupportTools\obj\Debug\SupportTools.pdb
+C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTools\SupportTools\bin\Debug\SupportTools.exe.config
+C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTools\SupportTools\bin\Debug\SupportTools.exe
+C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTools\SupportTools\bin\Debug\SupportTools.pdb
+C:\Users\fabiano.faleiro\Downloads\Desktop\Desktop\PROJETINHOS TOTVS\SupportTools\SupportTools\obj\Debug\SupportTools.csprojResolveAssemblyReference.cache
