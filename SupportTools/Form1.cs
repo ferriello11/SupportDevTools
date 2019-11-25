@@ -1,12 +1,5 @@
 ﻿using SupportDataBase;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SupportTools
@@ -14,7 +7,7 @@ namespace SupportTools
     public partial class Form1 : Form
     {
         private Timer time = new Timer();
-
+        DatabaseManager DbConecction;
         public DatabaseManager ConectDB()
         {
 
@@ -27,10 +20,11 @@ namespace SupportTools
 
             return BancoConectado;
         }
-             
+
         public Form1()
         {
             //    MessageBox.Show("ANTES DE REALIZAR A EXCLUSÃO FAÇA UM BKP!");
+            DbConecction = ConectDB();
             InitializeComponent();
             AtualizarCombo();
         }
@@ -42,13 +36,13 @@ namespace SupportTools
 
         private void AtualizarCombo()
         {
-            var us01Items = ConectDB().GetDatable("select * from us01 where usertype = 'M'");
+            var us01Items = DbConecction.GetDatable("select * from us01 where usertype = 'M'");
 
             comboBox1.DataSource = us01Items;
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "UserNumber";
 
-            var ItensDuplicados = ConectDB().GetDatable($@"select * FROM AGE03 WHERE AGE03_ID IN (
+            var ItensDuplicados = DbConecction.GetDatable($@"select * FROM AGE03 WHERE AGE03_ID IN (
                                     select AGE03.AGE03_ID from age03 inner join
                                     (select data,inicio,usernumber, COUNT(*) AS C from AGE03
                                     where ATIVO = 'T' and ATIVO = 'F'
@@ -64,49 +58,49 @@ namespace SupportTools
             comboBox2.DataSource = ItensDuplicados;
             comboBox2.DisplayMember = "Data";
 
-            var CpfPacienteVazio = ConectDB().GetDatable($@"select * from Clini_01 
-                                    WHERE CLINI_01_cpf IN (    
+            //var CpfPacienteVazio =DbConecction.GetDatable($@"select * from Clini_01 
+            //                        WHERE CLINI_01_cpf IN (    
         
-                                    select CLINI_01.Clini_01_CPF from CLINI_01 inner join
+            //                        select CLINI_01.Clini_01_CPF from CLINI_01 inner join
 
-                                    (select clini_01_cpf, COUNT(*) AS C from CLINI_01
-                                    where ATIVO = 'T' and Clini_01_CPF = ''
-                                    group by clini_01_cpf
-                                    having COUNT (*) > 1) duplicatas 
-                                    on CLINI_01.Clini_01_CPF = duplicatas.Clini_01_CPF 
-                                    WHERE
-                                    CLINI_01.ATIVO='T')");
-            comboBox3.DataSource = CpfPacienteVazio;
-            comboBox3.DisplayMember = "Name";
+            //                        (select clini_01_cpf, COUNT(*) AS C from CLINI_01
+            //                        where ATIVO = 'T' and Clini_01_CPF = ''
+            //                        group by clini_01_cpf
+            //                        having COUNT (*) > 1) duplicatas 
+            //                        on CLINI_01.Clini_01_CPF = duplicatas.Clini_01_CPF 
+            //                        WHERE
+            //                        CLINI_01.ATIVO='T')");
+            //comboBox3.DataSource = CpfPacienteVazio;
+            //comboBox3.DisplayMember = "Name";
 
-            var CpfPaciente = ConectDB().GetDatable($@"select * from Clini_01 
-                                    WHERE CLINI_01_cpf IN (    
-        
-                                    select CLINI_01.Clini_01_CPF from CLINI_01 inner join
+            //var CpfPaciente =DbConecction.GetDatable($@"select * from Clini_01 
+            //                        WHERE CLINI_01_cpf IN (    
 
-                                    (select clini_01_cpf, COUNT(*) AS C from CLINI_01
-                                    where ATIVO = 'T' and Clini_01_CPF != ''
-                                    group by clini_01_cpf
-                                    having COUNT (*) > 1) duplicatas 
-                                    on CLINI_01.Clini_01_CPF = duplicatas.Clini_01_CPF 
-                                    WHERE
-                                    CLINI_01.ATIVO='T')");
-            comboBox4.DataSource = CpfPaciente;
-            comboBox4.DisplayMember = "Name";
+            //                        select CLINI_01.Clini_01_CPF from CLINI_01 inner join
 
-            var CpfInvalido = ConectDB().GetDatable($@"select replace (REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '') ,clini_01_cpf 
-                                    from CLINI_01 
-                                    where clini_01_cpf is not null");
+            //                        (select clini_01_cpf, COUNT(*) AS C from CLINI_01
+            //                        where ATIVO = 'T' and Clini_01_CPF != ''
+            //                        group by clini_01_cpf
+            //                        having COUNT (*) > 1) duplicatas 
+            //                        on CLINI_01.Clini_01_CPF = duplicatas.Clini_01_CPF 
+            //                        WHERE
+            //                        CLINI_01.ATIVO='T')");
+            //comboBox4.DataSource = CpfPaciente;
+            //comboBox4.DisplayMember = "Name";
 
-            comboBox5.DataSource = CpfInvalido;
-            comboBox5.DisplayMember = "clini_01_cpf";
+            //var CpfInvalido = DbConecction.GetDatable($@"select replace (REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '') ,clini_01_cpf 
+            //                        from CLINI_01 
+            //                        where clini_01_cpf is not null");
 
-            var CpfMaiorQueDoze = ConectDB().GetDatable($@"SELECT Clini_01_CPF,*
-                                    FROM clini_01
-                                    WHERE LEN (Clini_01_CPF) > 11");
+            //comboBox5.DataSource = CpfInvalido;
+            //comboBox5.DisplayMember = "clini_01_cpf";
 
-            comboBox6.DataSource = CpfMaiorQueDoze;
-            comboBox6.DisplayMember = "Clini_01_CPF";
+            //var CpfMaiorQueDoze = DbConecction.GetDatable($@"SELECT Clini_01_CPF,*
+            //                        FROM clini_01
+            //                        WHERE LEN (Clini_01_CPF) > 11");
+
+            //comboBox6.DataSource = CpfMaiorQueDoze;
+            //comboBox6.DisplayMember = "Clini_01_CPF";
 
 
         }
@@ -115,7 +109,7 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"update DAT005 set FIELD = 'PCOD' where TABLENAME='clini_01'
+               DbConecction.ExecuteNonQueries($@"update DAT005 set FIELD = 'PCOD' where TABLENAME='clini_01'
                     
                 DECLARE @TABLENAME VARCHAR(255);
                 DECLARE @FIELDNAME VARCHAR(255);
@@ -151,17 +145,17 @@ namespace SupportTools
 
             
                 ");
-                MessageBox.Show("Concluido");
+                
 
             }
             catch (Exception)
             {
-                MessageBox.Show("Script Concluido");
+                MessageBox.Show("NÃO EXECUTADO - DAT005");
             }
 
 
 
-            
+
 
 
 
@@ -172,7 +166,7 @@ namespace SupportTools
             //DatabaseManager db = new DatabaseManager("Data Source=localhost\\SQLEXPRESS;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;");
             try
             {
-                ConectDB().ExecuteNonQueries($@"UPDATE FIN_02 SET CLOUD_SYNC_DATE = '2014-05-06 17:35:28.453', CLOUD_SYNC_ID = 2 WHERE TABLENAME = 'PROPTB_TUSS'
+               DbConecction.ExecuteNonQueries($@"UPDATE FIN_02 SET CLOUD_SYNC_DATE = '2014-05-06 17:35:28.453', CLOUD_SYNC_ID = 2 WHERE TABLENAME = 'PROPTB_TUSS'
 
                                             UPDATE PROPTB_TUSS SET CLOUD_SYNC_ID = 2 , CLOUD_SYNC_DATE = '2014-05-06 17:35:28.757' WHERE PROPTB_TUSS_ID = 1
                                             UPDATE PROPTB_TUSS SET CLOUD_SYNC_ID = 3 , CLOUD_SYNC_DATE = '2014-05-06 17:35:28.760' WHERE PROPTB_TUSS_ID = 2
@@ -5881,12 +5875,12 @@ namespace SupportTools
                                             UPDATE PROPTB_TUSS SET CLOUD_SYNC_ID = 5706 , CLOUD_SYNC_DATE = '2014-05-06 17:41:41.517' WHERE PROPTB_TUSS_ID = 5705
                                             UPDATE PROPTB_TUSS SET CLOUD_SYNC_ID = 5707 , CLOUD_SYNC_DATE = '2014-05-06 17:41:41.650' WHERE PROPTB_TUSS_ID = 5706
                                             UPDATE PROPTB_TUSS SET CLOUD_SYNC_ID = 5708 , CLOUD_SYNC_DATE = '2014-05-06 17:41:41.783' WHERE PROPTB_TUSS_ID = 5707");
-                MessageBox.Show("Concluido");
+                
             }
 
             catch
             {
-                MessageBox.Show("Execute mais uma vez");
+                MessageBox.Show("NÃO EXECUTADO - UPDATE_TUSS");
 
             }
 
@@ -5898,105 +5892,105 @@ namespace SupportTools
 
         //    try
         //    {   // primeira parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE AGE011_PRECADASTRO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE AGE02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE AGE03 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //segunda parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE AGE04 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE AGE05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE AMB90 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //terceira parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE AMB92 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE AMB96 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE CARRIER SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //quarta parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE CFG01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE CIEFAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE CLINI_01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //quinta parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE CLINI_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE CLINI_05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE CO12_1 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //sexta parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE CO12_2 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE CO25 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE CO28 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //setima parte
-        //       ConectDB().ExecuteNonQueries($@"
+        //      DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE CONTA_MATERIAIS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE CONTA_MEDICAMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE CONTA_PACIENTE SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //oitava parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE CONTA_PACOTES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE CONTA_PROCEDIMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE CONTA_PROCEDIMENTOS_PROFISSIONAL SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //nona parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE CONTA_TAXAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE FIN_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE FIN_51 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //decima parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE FUNCOES_REPASSES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE LOCAL_ATENDIMENTO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE ME SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //11 parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE PROPTB_TUSS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE PROPTB59 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE PROPTB60 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //12 parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE PROPTB61 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE PROPTB62 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE PROPTB63 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //13 parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE PROPTB64 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE PROPTB65 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE SYS011 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //14 parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE SYS084 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE SYS099 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        UPDATE TISS009 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
         //        commit transaction;");
         //        //15 parte
-        //        ConectDB().ExecuteNonQueries($@"
+        //       DbConecction.ExecuteNonQueries($@"
         //        begin transaction;
         //        UPDATE SYS103 SET CLOUD_SYNC_ID = null;
         //        UPDATE TUSS001_TUSS SET CLOUD_SYNC_ID = null;
@@ -6012,52 +6006,60 @@ namespace SupportTools
 
         private void RESET_NUVEM(object sender, EventArgs e)
         {
-            ConectDB().ExecuteNonQueries($@"DELETE FROM RESUMO_PMED;
-                                        UPDATE CLINI_05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE AMB90 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE AMB92 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE AMB96 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CIEFAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE PROPTB_TUSS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE PROPTB59 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE PROPTB60 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE PROPTB61 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE PROPTB62 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE PROPTB63 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE PROPTB64 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE PROPTB65 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE AGE011_PRECADASTRO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE AGE02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE AGE03 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE AGE04 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE AGE05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CARRIER SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CFG01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CLINI_01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CLINI_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CO12_1 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CO12_2 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CO25 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CO28 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CONTA_MATERIAIS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CONTA_MEDICAMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CONTA_PACIENTE SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CONTA_PACOTES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CONTA_PROCEDIMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CONTA_PROCEDIMENTOS_PROFISSIONAL SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE CONTA_TAXAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE FIN_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE FIN_51 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE FUNCOES_REPASSES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE LOCAL_ATENDIMENTO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE ME SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE SYS011 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE SYS084 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE SYS099 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE TISS009 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                        UPDATE SYS103 SET CLOUD_SYNC_ID = null;
-                                        UPDATE TUSS001_TUSS SET CLOUD_SYNC_ID = null;"
-            );
+            try
+            {
+               DbConecction.ExecuteNonQueries($@"DELETE FROM RESUMO_PMED;
+                                            UPDATE CLINI_05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE AMB90 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE AMB92 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE AMB96 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CIEFAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE PROPTB_TUSS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE PROPTB59 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE PROPTB60 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE PROPTB61 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE PROPTB62 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE PROPTB63 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE PROPTB64 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE PROPTB65 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE AGE011_PRECADASTRO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE AGE02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE AGE03 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE AGE04 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE AGE05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CARRIER SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CFG01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CLINI_01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CLINI_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CO12_1 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CO12_2 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CO25 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CO28 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CONTA_MATERIAIS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CONTA_MEDICAMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CONTA_PACIENTE SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CONTA_PACOTES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CONTA_PROCEDIMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CONTA_PROCEDIMENTOS_PROFISSIONAL SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CONTA_TAXAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE FIN_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE FIN_51 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE FUNCOES_REPASSES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE LOCAL_ATENDIMENTO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE ME SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE SYS011 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE SYS084 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE SYS099 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE TISS009 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE SYS103 SET CLOUD_SYNC_ID = null;
+                                            UPDATE TUSS001_TUSS SET CLOUD_SYNC_ID = null;"
+                );
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("NÃO EXECUTADO! - RESET_NUVEM ");
+            }
         }
 
         private void DELETE_RESUMO_LOCK(object sender, EventArgs e)
@@ -6065,14 +6067,14 @@ namespace SupportTools
             //DatabaseManager db = new DatabaseManager("Data Source=localhost\\SQLEXPRESS;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;");
             try
             {
-                ConectDB().ExecuteNonQueries($@"DELETE FROM RESUMO_PMED");
-                ConectDB().ExecuteNonQueries($@"DELETE FROM CLINI_01_LOCK");
-                MessageBox.Show("Concluido");
+               DbConecction.ExecuteNonQueries($@"DELETE FROM RESUMO_PMED");
+               DbConecction.ExecuteNonQueries($@"DELETE FROM CLINI_01_LOCK");
+                
 
             }
             catch
             {
-                MessageBox.Show("Execute mais uma vez");
+                MessageBox.Show("NÃO EXECUTADO! - DELETE_RESUMO_LOCK");
             }
         }
 
@@ -6096,7 +6098,7 @@ namespace SupportTools
             //groupBox2.Visible = false;
             try
             {
-                ConectDB().ExecuteNonQueries($@"
+               DbConecction.ExecuteNonQueries($@"
                 DELETE FROM AGE03 WHERE AGE03_ID IN (
                 select AGE03.AGE03_ID from age03 inner join
                 (select data,inicio,usernumber, COUNT(*) AS C from AGE03
@@ -6124,10 +6126,10 @@ namespace SupportTools
 
         private void DeletaAgendamentosAge04(object sender, EventArgs e)
         {
-            
+
             try
             {
-                ConectDB().ExecuteNonQueries($@"delete  from AGE04 where AGE03_ID not in (select AGE03_ID from AGE03)");
+               DbConecction.ExecuteNonQueries($@"delete  from AGE04 where AGE03_ID not in (select AGE03_ID from AGE03)");
                 MessageBox.Show("Deletados");
             }
             catch (Exception)
@@ -6143,10 +6145,10 @@ namespace SupportTools
 
         private void CorrigeCpfDuplicado(object sender, EventArgs e)
         {
-            
+
             try
             {
-               ConectDB().ExecuteNonQueries($@"update CLINI_01 set Clini_01_CPF = NULL 
+               DbConecction.ExecuteNonQueries($@"update CLINI_01 set Clini_01_CPF = NULL 
     
                WHERE CLINI_01_cpf IN (    
     
@@ -6159,12 +6161,12 @@ namespace SupportTools
                on CLINI_01.Clini_01_CPF = duplicatas.Clini_01_CPF 
                WHERE
                CLINI_01.ATIVO='T')");
-                MessageBox.Show("Concluido com sucesso.");
+                
 
             }
             catch (Exception)
             {
-                MessageBox.Show("Execute mais uma vez");
+                MessageBox.Show("NÃO EXECUTADO! - CorrigeCpfDuplicado");
             }
             finally
             {
@@ -6177,45 +6179,44 @@ namespace SupportTools
 
         private void DeletarMedico(object sender, EventArgs e)
         {
-            
+
             var profUserNumber = comboBox1.SelectedValue;
             try
             {
-               ConectDB().ExecuteNonQueries($@"delete from GRUPO_USUARIO WHERE USERNUMBER IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from GRUPO_USUARIO WHERE USERNUMBER IN({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from PERMISSAO_USUARIO WHERE USERNUMBER IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from PERMISSAO_USUARIO WHERE USERNUMBER IN({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from SYS139_BACKUP where USERNUMBER in({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from SYS139_BACKUP where USERNUMBER in({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from US01 where USERNUMBER in({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from US01 where USERNUMBER in({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from AGE04 WHERE USERNUMBER IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from AGE04 WHERE USERNUMBER IN({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from AGE04 WHERE PROFESSIONALCOD IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from AGE04 WHERE PROFESSIONALCOD IN({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from AGE06 WHERE USERNUMBER IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from AGE06 WHERE USERNUMBER IN({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from AGE08 WHERE USERNUMBER IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from AGE08 WHERE USERNUMBER IN({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from SYS011 WHERE PROFESSIONALCOD IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from SYS011 WHERE PROFESSIONALCOD IN({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from CO19 WHERE USERNUMBER IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from CO19 WHERE USERNUMBER IN({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from CO22 WHERE USERNUMBER IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from CO22 WHERE USERNUMBER IN({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from CO28 WHERE USERNUMBER IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from CO28 WHERE USERNUMBER IN({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from ME WHERE USERNUMBER IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from ME WHERE USERNUMBER IN({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from CLINI_02 WHERE USERNUMBER IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from CLINI_02 WHERE USERNUMBER IN({profUserNumber})");
 
-               ConectDB().ExecuteNonQueries($@"delete from CLINI_04 WHERE USERNUMBER IN({profUserNumber})");
+               DbConecction.ExecuteNonQueries($@"delete from CLINI_04 WHERE USERNUMBER IN({profUserNumber})");
 
-                MessageBox.Show("Concluido com sucesso.");
             }
             catch (Exception)
             {
-                MessageBox.Show("Erro ao e");
+                MessageBox.Show("NÃO EXECUTADO! - DeletarMedico");
 
             }
             AtualizarCombo();
@@ -6225,15 +6226,22 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO19') AND NAME = 'CLOUD_SYNC_DATE')
-                                            BEGIN
+                DbConecction.ExecuteNonQueries($@"USE [PersonalMed]
+                                             GO
+                                                IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO19') AND NAME = 'CLOUD_SYNC_DATE')
+                                              BEGIN
 	                                            ALTER TABLE dbo.CO19 ADD CLOUD_SYNC_DATE DATETIME;
-                                            END");
-                MessageBox.Show("Concluido");
+                                              END");
+
+                //($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO19') AND NAME = 'CLOUD_SYNC_DATE')
+                //                        BEGIN
+                //                         ALTER TABLE dbo.CO19 ADD CLOUD_SYNC_DATE DATETIME;
+                //                        END");
+                
             }
             catch (Exception)
             {
-                MessageBox.Show("NÃO EXECUTADO!");
+                MessageBox.Show("NÃO EXECUTADO! - ADD_COLUMN_CO19_CLOUD_SYNC_DATE");
             }
         }
 
@@ -6241,15 +6249,15 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO50') AND NAME = 'CLOUD_SYNC_DATE')
+               DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO50') AND NAME = 'CLOUD_SYNC_DATE')
                                                 BEGIN
 	                                                ALTER TABLE dbo.CO50 ADD CLOUD_SYNC_DATE DATETIME;
                                                 END");
-                MessageBox.Show("Concluido");
+                
             }
             catch (Exception)
             {
-                MessageBox.Show("NÃO EXECUTADO!");
+                MessageBox.Show("NÃO EXECUTADO! - ADD_COLUMN_CO50_CLOUD_SYNC_DATE");
             }
         }
 
@@ -6257,15 +6265,15 @@ namespace SupportTools
         {
             try
             {
-               ConectDB().ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO19') AND NAME = 'CLOUD_SYNC_ID')
+               DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO19') AND NAME = 'CLOUD_SYNC_ID')
                                             BEGIN
 	                                            ALTER TABLE dbo.CO19 ADD CLOUD_SYNC_ID INT;
                                             END");
-                MessageBox.Show("Concluido");
+                
             }
             catch (Exception)
             {
-                MessageBox.Show("NÃO EXECUTADO!");
+                MessageBox.Show("NÃO EXECUTADO! - ADD_COLUMN_CO19_CLOUD_SYNC_ID");
 
             }
         }
@@ -6274,15 +6282,14 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO50') AND NAME = 'CLOUD_SYNC_ID')
+               DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO50') AND NAME = 'CLOUD_SYNC_ID')
                                                 BEGIN
 	                                                ALTER TABLE dbo.CO50 ADD CLOUD_SYNC_ID INT;
                                                 END");
-                MessageBox.Show("Concluido");
-            }
+             }
             catch (Exception)
             {
-                MessageBox.Show("NÃO EXECUTADO!");
+                MessageBox.Show("NÃO EXECUTADO! - ADD_COLUMN_CO50_CLOUD_SYNC_ID");
             }
         }
 
@@ -6290,7 +6297,7 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO51') AND NAME = 'CLOUD_SYNC_DATE')
+               DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO51') AND NAME = 'CLOUD_SYNC_DATE')
                                                     BEGIN
 	                                                    ALTER TABLE dbo.CO51 ADD CLOUD_SYNC_DATE DATETIME;
                                                     END
@@ -6299,11 +6306,11 @@ namespace SupportTools
                                                     BEGIN
 	                                                    ALTER TABLE dbo.CO51_1 ADD CLOUD_SYNC_DATE DATETIME;
                                                     END ");
-                MessageBox.Show("Concluido");
+                
             }
             catch (Exception)
             {
-                MessageBox.Show("NÃO EXECUTADO!");
+                MessageBox.Show("NÃO EXECUTADO! - ADD_COLUMN_CO51_CLOUD_SYNC_DATE");
             }
 
         }
@@ -6312,7 +6319,7 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO51') AND NAME = 'CLOUD_SYNC_ID')
+               DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO51') AND NAME = 'CLOUD_SYNC_ID')
                                             BEGIN
 	                                            ALTER TABLE dbo.CO51 ADD CLOUD_SYNC_ID INT;
                                             END
@@ -6321,11 +6328,11 @@ namespace SupportTools
                                             BEGIN
 	                                            ALTER TABLE dbo.CO51_1 ADD CLOUD_SYNC_ID INT;
                                             END");
-                MessageBox.Show("Concluido");
+                
             }
             catch (Exception)
             {
-                MessageBox.Show("NÃO EXECUTADO!");
+                MessageBox.Show("NÃO EXECUTADO! - ADD_COLUMN_CO51_CLOUD_SYNC_ID");
             }
 
         }
@@ -6334,7 +6341,7 @@ namespace SupportTools
         {
             try
             {
-               ConectDB().ExecuteNonQueries($@"USE [PersonalMed]
+               DbConecction.ExecuteNonQueries($@"USE [PersonalMed]
                                         DROP TABLE DAT005
 
                                         USE [PersonalMed]
@@ -6363,11 +6370,11 @@ namespace SupportTools
 
                                         SET ANSI_PADDING OFF
                                         GO");
-                MessageBox.Show("Concluido");
+                
             }
             catch (Exception)
             {
-                MessageBox.Show("NÃO EXECUTADO!");
+                MessageBox.Show("NÃO EXECUTADO! - DROP_AND_CREATE_NEW_DAT005");
             }
         }
 
@@ -6375,7 +6382,7 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"USE [PersonalMed]
+               DbConecction.ExecuteNonQueries($@"USE [PersonalMed]
                                         GO
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'AGE01', 1, N'AGE01', N'AGE01_ID')
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'AGE011_PRECADASTRO', 1, N'AGE011_PRECADASTRO', N'AGE011_ID')
@@ -6636,11 +6643,11 @@ namespace SupportTools
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'VAC_CFG', 32, N'VAC_CFG', N'CODIGO')
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'Val_Norm', 137, N'Val_Norm', N'titlecod')
                                         ");
-                MessageBox.Show("Concluido");
+                
             }
             catch (Exception)
             {
-                MessageBox.Show("NÃO EXECUTADO!");
+                MessageBox.Show("NÃO EXECUTADO! - INSERT_NEW_DAT005");
             }
         }
 
@@ -6648,7 +6655,7 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"DECLARE @TABLENAME VARCHAR(255);
+               DbConecction.ExecuteNonQueries($@"DECLARE @TABLENAME VARCHAR(255);
                                             DECLARE @FIELDNAME VARCHAR(255);
                                             DECLARE @NEXTKEY INT;
                                             DECLARE @SQLString NVARCHAR(255);
@@ -6679,11 +6686,11 @@ namespace SupportTools
                                             END
                                             CLOSE CUR_TEMP
                                             DEALLOCATE CUR_TEMP");
-                MessageBox.Show("Concluido");
+                
             }
             catch (Exception)
             {
-                MessageBox.Show("NÃO EXECUTADO!");
+                MessageBox.Show("NÃO EXECUTADO! - REPAIR_DAT005");
             }
         }
 
@@ -6696,15 +6703,15 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"UPDATE CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
+               DbConecction.ExecuteNonQueries($@" CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
                                                 where clini_01_cpf is not null
                                             ");
-                MessageBox.Show("Concluido");
+                
             }
             catch (Exception)
             {
 
-                MessageBox.Show("NÃO EXECUTADO!"); 
+                MessageBox.Show("NÃO EXECUTADO! - ListaCpfComCaracterEspecial");
             }
         }
 
@@ -6712,93 +6719,102 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"update clini_01  set Clini_01_CPF = NULL
+               DbConecction.ExecuteNonQueries($@"upda hhh set Clini_01_CPF = NULL
                                             WHERE LEN(Clini_01_CPF) > 11");
-                MessageBox.Show("Concluido");
+                
             }
             catch (Exception)
             {
-
-                MessageBox.Show("");
-                MessageBox.Show("NÃO EXECUTADO!");
+                MessageBox.Show("NÃO EXECUTADO! - ListaCpfMaiorQue11Caracteres");
             }
-            
+
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
             ManipularBotoes(false);
             //InitializeProgressBar();
-            progressBar1.Maximum = 17;
+            
+            progressBar1.Maximum = 18;
+            progressBar1.Value = 0;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            btApagarDuplicados.PerformClick();
+
+            btApagarDuplicados_Click(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            btApagarAge04.PerformClick();
+            btApagarAge04_Click(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            button5.PerformClick();
+            CorrecaoCaracterEspecialCpf(null,null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            button11.PerformClick();
+            ListaCpfMaiorQue11Caracteres(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            btCo19Date.PerformClick();
+            BtCorrecaoCpfMaiorQue11(null,null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            button4.PerformClick();
+            ADD_COLUMN_CO19_CLOUD_SYNC_DATE(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            button3.PerformClick();
+            ADD_COLUMN_CO19_CLOUD_SYNC_ID(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            button2.PerformClick();
+            ADD_COLUMN_CO50_CLOUD_SYNC_DATE(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            button6.PerformClick();
+            ADD_COLUMN_CO50_CLOUD_SYNC_ID(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            button7.PerformClick();
+            ADD_COLUMN_CO51_CLOUD_SYNC_DATE(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            button8.PerformClick();
+            ADD_COLUMN_CO51_CLOUD_SYNC_ID(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            button9.PerformClick();
+            DROP_AND_CREATE_NEW_DAT005(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            button10.PerformClick();
+            INSERT_NEW_DAT005(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            btDat005.PerformClick();
+            REPAIR_DAT005(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            btUpdateTuss.PerformClick();
+            DAT005(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            btResetNuvem.PerformClick();
+            UPDATE_TUSS(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            btDeleteResumo.PerformClick();
+            RESET_NUVEM(null, null);
+            progressBar1.Value += 1;
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
+            DELETE_RESUMO_LOCK(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
             ManipularBotoes(true);
+
+            MessageBox.Show("CONCLUIDO COM SUCESSO");
+            
         }
 
         private void btApagarDuplicados_Click(object sender, EventArgs e)
@@ -6806,7 +6822,7 @@ namespace SupportTools
             //groupBox2.Visible = false;
             try
             {
-                ConectDB().ExecuteNonQueries($@"
+               DbConecction.ExecuteNonQueries($@"
                 DELETE FROM AGE03 WHERE AGE03_ID IN (
                 select AGE03.AGE03_ID from age03 inner join
                 (select data,inicio,usernumber, COUNT(*) AS C from AGE03
@@ -6819,11 +6835,11 @@ namespace SupportTools
                 AND AGE03.USERNUMBER = duplicatas.USERNUMBER
                 WHERE
                 AGE03.ATIVO='T'and age03.ATIVO='F')");
-                MessageBox.Show("Deletados");
+                
             }
             catch (Exception)
             {
-                MessageBox.Show("Execute mais uma vez");
+                MessageBox.Show("NÃO EXECUTE! - btApagarDuplicados_Click");
             }
             finally
             {
@@ -6836,12 +6852,12 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"delete  from AGE04 where AGE03_ID not in (select AGE03_ID from AGE03)");
-                MessageBox.Show("Deletados");
+               DbConecction.ExecuteNonQueries($@"delete  from AGE04 where AGE03_ID not in (select AGE03_ID from AGE03)");
+                
             }
             catch (Exception)
             {
-                MessageBox.Show("Execute mais uma vez");
+                MessageBox.Show("NÃO EXECUTADO! - btApagarAge04_Click");
             }
             finally
             {
@@ -6854,15 +6870,14 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"update clini_01  set Clini_01_CPF = NULL
+               DbConecction.ExecuteNonQueries($@"update clini_01  set Clini_01_CPF = NULL
                                             WHERE LEN(Clini_01_CPF) > 11");
-                MessageBox.Show("Concluido");
-            }
+             }
             catch (Exception)
             {
 
                 MessageBox.Show("");
-                MessageBox.Show("NÃO EXECUTADO!");
+                MessageBox.Show("NÃO EXECUTADO! - BtCorrecaoCpfMaiorQue11");
             }
         }
 
@@ -6870,15 +6885,15 @@ namespace SupportTools
         {
             try
             {
-                ConectDB().ExecuteNonQueries($@"UPDATE CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
+               DbConecction.ExecuteNonQueries($@"UPDATE CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
                                                 where clini_01_cpf is not null
                                             ");
-                MessageBox.Show("Concluido");
+                
             }
             catch (Exception)
             {
 
-                MessageBox.Show("NÃO EXECUTADO!");
+                MessageBox.Show("NÃO EXECUTADO! - CorrecaoCaracterEspecialCpf");
             }
         }
     }

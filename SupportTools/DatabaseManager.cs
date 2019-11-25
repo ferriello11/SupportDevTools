@@ -41,14 +41,13 @@ namespace SupportDataBase
 
                 await cmd.ExecuteNonQueryAsync();
 
-                CloseConnection();
+                //CloseConnection();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
         }
-
 
         public SqlDataReader DataReader(string Query_)
         {
@@ -88,8 +87,5 @@ namespace SupportDataBase
                 throw(ex);
             }
         }
-               
-       
-
     }
 }
