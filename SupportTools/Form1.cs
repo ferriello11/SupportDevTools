@@ -29,11 +29,15 @@ namespace SupportTools
         }
              
         public Form1()
-        {   
-        //    MessageBox.Show("ANTES DE REALIZAR A EXCLUSÃO FAÇA UM BKP!");
+        {
+            //    MessageBox.Show("ANTES DE REALIZAR A EXCLUSÃO FAÇA UM BKP!");
             InitializeComponent();
             AtualizarCombo();
-            
+        }
+
+        private void ManipularBotoes(bool enabled)
+        {
+            panel1.Enabled = enabled;
         }
 
         private void AtualizarCombo()
@@ -6089,34 +6093,33 @@ namespace SupportTools
 
         private void DelataAgendamentosDuplicados(object sender, EventArgs e)
         {
+            //groupBox2.Visible = false;
+            try
+            {
+                ConectDB().ExecuteNonQueries($@"
+                DELETE FROM AGE03 WHERE AGE03_ID IN (
+                select AGE03.AGE03_ID from age03 inner join
+                (select data,inicio,usernumber, COUNT(*) AS C from AGE03
+                where ATIVO = 'T' and ativo = 'F'
+                group by DATA,INICIO,USERNUMBER
+                having COUNT (*) > 1) duplicatas 
 
-            groupBox2.Visible = false;
-            //try
-            //{
-            //    ConectDB().ExecuteNonQueries($@"
-            //    DELETE FROM AGE03 WHERE AGE03_ID IN (
-            //    select AGE03.AGE03_ID from age03 inner join
-            //    (select data,inicio,usernumber, COUNT(*) AS C from AGE03
-            //    where ATIVO = 'T' and ativo = 'F'
-            //    group by DATA,INICIO,USERNUMBER
-            //    having COUNT (*) > 1) duplicatas 
-
-            //    on age03.DATA = duplicatas.DATA 
-            //    AND AGE03.INICIO = duplicatas.INICIO 
-            //    AND AGE03.USERNUMBER = duplicatas.USERNUMBER
-            //    WHERE
-            //    AGE03.ATIVO='T'and age03.ATIVO='F')");
-            //    MessageBox.Show("Deletados");
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("Execute mais uma vez");
-            //}
-            //finally
-            //{
-            //    comboBox2.SelectedIndex = -1;
-            //    AtualizarCombo();
-            //}
+                on age03.DATA = duplicatas.DATA 
+                AND AGE03.INICIO = duplicatas.INICIO 
+                AND AGE03.USERNUMBER = duplicatas.USERNUMBER
+                WHERE
+                AGE03.ATIVO='T'and age03.ATIVO='F')");
+                MessageBox.Show("Deletados");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Execute mais uma vez");
+            }
+            finally
+            {
+                comboBox2.SelectedIndex = -1;
+                AtualizarCombo();
+            }
         }
 
         private void DeletaAgendamentosAge04(object sender, EventArgs e)
@@ -6724,63 +6727,161 @@ namespace SupportTools
 
         private void button12_Click(object sender, EventArgs e)
         {
+            ManipularBotoes(false);
             //InitializeProgressBar();
             progressBar1.Maximum = 17;
 
             btApagarDuplicados.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             btApagarAge04.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             button5.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             button11.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             btCo19Date.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             button4.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             button3.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             button2.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             button6.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             button7.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             button8.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             button9.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             button10.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             btDat005.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             btUpdateTuss.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             btResetNuvem.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             btDeleteResumo.PerformClick();
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+            ManipularBotoes(true);
+        }
+
+        private void btApagarDuplicados_Click(object sender, EventArgs e)
+        {
+            //groupBox2.Visible = false;
+            try
+            {
+                ConectDB().ExecuteNonQueries($@"
+                DELETE FROM AGE03 WHERE AGE03_ID IN (
+                select AGE03.AGE03_ID from age03 inner join
+                (select data,inicio,usernumber, COUNT(*) AS C from AGE03
+                where ATIVO = 'T' and ativo = 'F'
+                group by DATA,INICIO,USERNUMBER
+                having COUNT (*) > 1) duplicatas 
+
+                on age03.DATA = duplicatas.DATA 
+                AND AGE03.INICIO = duplicatas.INICIO 
+                AND AGE03.USERNUMBER = duplicatas.USERNUMBER
+                WHERE
+                AGE03.ATIVO='T'and age03.ATIVO='F')");
+                MessageBox.Show("Deletados");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Execute mais uma vez");
+            }
+            finally
+            {
+                comboBox2.SelectedIndex = -1;
+                AtualizarCombo();
+            }
+        }
+
+        private void btApagarAge04_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConectDB().ExecuteNonQueries($@"delete  from AGE04 where AGE03_ID not in (select AGE03_ID from AGE03)");
+                MessageBox.Show("Deletados");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Execute mais uma vez");
+            }
+            finally
+            {
+                comboBox2.SelectedIndex = -1;
+                AtualizarCombo();
+            }
+        }
+
+        private void BtCorrecaoCpfMaiorQue11(object sender, EventArgs e)
+        {
+            try
+            {
+                ConectDB().ExecuteNonQueries($@"update clini_01  set Clini_01_CPF = NULL
+                                            WHERE LEN(Clini_01_CPF) > 11");
+                MessageBox.Show("Concluido");
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("");
+                MessageBox.Show("NÃO EXECUTADO!");
+            }
+        }
+
+        private void CorrecaoCaracterEspecialCpf(object sender, EventArgs e)
+        {
+            try
+            {
+                ConectDB().ExecuteNonQueries($@"UPDATE CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
+                                                where clini_01_cpf is not null
+                                            ");
+                MessageBox.Show("Concluido");
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("NÃO EXECUTADO!");
+            }
         }
     }
-
 }
 
 
