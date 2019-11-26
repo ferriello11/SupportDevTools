@@ -33,20 +33,17 @@ namespace SupportDataBase
         }
 
 
-        public async void ExecuteNonQueries(string Query_, string method = "")
+        public void ExecuteNonQueries(string Query_, string method = "")
         {
+            SqlCommand cmd = new SqlCommand(Query_, con);
             try
             {
-                SqlCommand cmd = new SqlCommand(Query_, con);
-                OpenConection();
-
-                await cmd.ExecuteNonQueryAsync();
-
+                //OpenConection();
+                cmd.ExecuteNonQuery();
                 //CloseConnection();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(method.ToString());
                 throw;
             }
         }
@@ -84,7 +81,7 @@ namespace SupportDataBase
 
                 return dataum;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

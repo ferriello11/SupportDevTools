@@ -13,9 +13,12 @@ namespace SupportTools
         public DatabaseManager ConectDB()
         {
 
-            DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\SQLEXPRESS;Password=totvs@123;Persist Security Info=True;User ID=sa;Initial Catalog=PersonalMed;");
-            //DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;User ID=sa;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;");
+            //Fabiano
+            //DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\SQLEXPRESS;Password=totvs@123;Persist Security Info=True;User ID=sa;Initial Catalog=PersonalMed;");
 
+            //Honatel
+            DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;Persist Security Info=True;User ID=sa;Initial Catalog=PersonalMed;");
+            
 
             //"Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;"
             //"Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;Persist Security Info=True;User ID=sa;Initial Catalog=PersonalMed;" providerName = "System.Data.SqlClient"
@@ -6229,7 +6232,6 @@ namespace SupportTools
             try
             {
                 DbConecction.ExecuteNonQueries($@"USE [PersonalMed]
-                                             GO
                                                 IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO19') AND NAME = 'CLOUD_SYNC_DATE')
                                               BEGIN
 	                                            ALTER TABLE dbo.CO19 ADD CLOUD_SYNC_DATE DATETIME;
@@ -6347,15 +6349,12 @@ namespace SupportTools
                                         DROP TABLE DAT005
 
                                         USE [PersonalMed]
-                                        GO
+                                        
                                         SET ANSI_NULLS ON
-                                        GO
 
                                         SET QUOTED_IDENTIFIER ON
-                                        GO
 
                                         SET ANSI_PADDING ON
-                                        GO
 
                                         CREATE TABLE [dbo].[DAT005](
 	                                        [TABLENAME] [varchar](20) NOT NULL,
@@ -6368,10 +6367,9 @@ namespace SupportTools
                                         )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
                                         ) ON [PRIMARY]
 
-                                        GO
 
                                         SET ANSI_PADDING OFF
-                                        GO");
+                                        ");
 
             }
             catch (Exception)
@@ -6385,7 +6383,6 @@ namespace SupportTools
             try
             {
                 DbConecction.ExecuteNonQueries($@"USE [PersonalMed]
-                                        GO
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'AGE01', 1, N'AGE01', N'AGE01_ID')
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'AGE011_PRECADASTRO', 1, N'AGE011_PRECADASTRO', N'AGE011_ID')
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'AGE012', 1, N'AGE012_RECURRENCE', N'AGE012_RECURRENCE_ID')
@@ -6487,7 +6484,6 @@ namespace SupportTools
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'FAT010', 1, N'FAT010_ITEM_REPASS', N'FAT010_ID')
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'FAT011', 1, N'FAT011_HOLIDAY', N'FAT011_ID')
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'FAT012', 1, N'FAT012_DEFAULT_ASSISTANT', N'FAT012_ID')
-                                        GO
                                         print 'Processed 100 total records'
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'FAT013', 1, N'FAT013_ANESTHETIC_TABLE', N'FAT013_ID')
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'FAT014', 1, N'FAT014_DEFAULT_ANESTHETIC', N'FAT014_ID')
@@ -6591,7 +6587,6 @@ namespace SupportTools
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'TISS015', 1, N'TISS015', N'TISS015_ID')
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'TISS016', 1, N'TISS016', N'TISS016_ID')
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'TISS017', 1, N'TISS017', N'TISS017_ID')
-                                        GO
                                         print 'Processed 200 total records'
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'TISS018', 1, N'TISS018', N'TISS018_ID')
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'TISS019', 1, N'TISS019', N'TISS019_ID')
@@ -6728,89 +6723,106 @@ namespace SupportTools
 
         private void button12_Click(object sender, EventArgs e)
         {
-
+            DbConecction.OpenConection();
             ManipularBotoes(false);
-            //InitializeProgressBar();
 
             progressBar1.Maximum = 18;
             progressBar1.Value = 0;
-            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
-
+            label6.Refresh(); 
+            label6.Text = "Progresso";
 
             btApagarDuplicados_Click(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             btApagarAge04_Click(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             CorrecaoCaracterEspecialCpf(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             ListaCpfMaiorQue11Caracteres(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             BtCorrecaoCpfMaiorQue11(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             ADD_COLUMN_CO19_CLOUD_SYNC_DATE(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             ADD_COLUMN_CO19_CLOUD_SYNC_ID(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             ADD_COLUMN_CO50_CLOUD_SYNC_DATE(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             ADD_COLUMN_CO50_CLOUD_SYNC_ID(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             ADD_COLUMN_CO51_CLOUD_SYNC_DATE(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             ADD_COLUMN_CO51_CLOUD_SYNC_ID(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             DROP_AND_CREATE_NEW_DAT005(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             INSERT_NEW_DAT005(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             REPAIR_DAT005(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             DAT005(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             UPDATE_TUSS(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             RESET_NUVEM(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
             DELETE_RESUMO_LOCK(null, null);
             progressBar1.Value += 1;
+            label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
             ManipularBotoes(true);
-
-
+            DbConecction.CloseConnection();
         }
 
         private void btApagarDuplicados_Click(object sender, EventArgs e)
@@ -6833,14 +6845,9 @@ namespace SupportTools
                 AGE03.ATIVO='T'and age03.ATIVO='F')");
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("NÃO EXECUTE! - btApagarDuplicados_Click");
-            }
-            finally
-            {
-                comboBox2.SelectedIndex = -1;
-                AtualizarCombo();
+                MessageBox.Show("NÃO EXECUTE! - btApagarDuplicados_Click/ " + ex.Message);
             }
         }
 
@@ -6884,7 +6891,6 @@ namespace SupportTools
                 DbConecction.ExecuteNonQueries($@"UPDATE CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
                                                 where clini_01_cpf is not null
                                             ");
-
             }
             catch (Exception)
             {
