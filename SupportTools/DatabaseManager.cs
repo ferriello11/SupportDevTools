@@ -5,15 +5,16 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SupportDataBase
-    
+
 {
     public class DatabaseManager
     {
         string ConnectionString = "";
         SqlConnection con;
-        
+
         public DatabaseManager(string connStr)
         {
             this.ConnectionString = connStr;
@@ -32,11 +33,11 @@ namespace SupportDataBase
         }
 
 
-        public async void ExecuteNonQueries(string Query_)
+        public async void ExecuteNonQueries(string Query_, string method = "")
         {
-            SqlCommand cmd = new SqlCommand(Query_, con);
             try
             {
+                SqlCommand cmd = new SqlCommand(Query_, con);
                 OpenConection();
 
                 await cmd.ExecuteNonQueryAsync();
@@ -45,6 +46,7 @@ namespace SupportDataBase
             }
             catch (Exception ex)
             {
+                MessageBox.Show(method.ToString());
                 throw;
             }
         }
@@ -78,13 +80,13 @@ namespace SupportDataBase
                 dr.Fill(ds);
                 DataTable dataum = ds.Tables[0];
 
-                CloseConnection();
+                //   CloseConnection();
 
                 return dataum;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw(ex);
+                throw;
             }
         }
     }

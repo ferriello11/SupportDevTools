@@ -31,6 +31,8 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -94,6 +96,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button14);
+            this.panel1.Controls.Add(this.button13);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
@@ -123,22 +127,38 @@
             this.panel1.Size = new System.Drawing.Size(626, 636);
             this.panel1.TabIndex = 31;
             // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(357, 348);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(143, 23);
+            this.button14.TabIndex = 44;
+            this.button14.Text = "Delete Servico";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.DeleteServico);
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(0, 0);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(75, 23);
+            this.button13.TabIndex = 0;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.progressBar1);
             this.groupBox2.Controls.Add(this.button12);
-            this.groupBox2.Location = new System.Drawing.Point(153, 480);
+            this.groupBox2.Location = new System.Drawing.Point(25, 475);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(297, 159);
+            this.groupBox2.Size = new System.Drawing.Size(297, 131);
             this.groupBox2.TabIndex = 43;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 98);
+            this.label6.Location = new System.Drawing.Point(21, 70);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 3;
@@ -146,14 +166,14 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(24, 114);
+            this.progressBar1.Location = new System.Drawing.Point(24, 97);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(251, 15);
             this.progressBar1.TabIndex = 2;
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(89, 50);
+            this.button12.Location = new System.Drawing.Point(89, 19);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(112, 33);
             this.button12.TabIndex = 0;
@@ -597,6 +617,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
     }
 }
 

@@ -1,6 +1,8 @@
 ﻿using SupportDataBase;
 using System;
 using System.Windows.Forms;
+using System.Diagnostics;
+
 
 namespace SupportTools
 {
@@ -11,7 +13,7 @@ namespace SupportTools
         public DatabaseManager ConectDB()
         {
 
-            DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;Persist Security Info=True;User ID=sa;Initial Catalog=PersonalMed;");
+            DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\SQLEXPRESS;Password=totvs@123;Persist Security Info=True;User ID=sa;Initial Catalog=PersonalMed;");
             //DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;User ID=sa;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;");
 
 
@@ -60,7 +62,7 @@ namespace SupportTools
 
             //var CpfPacienteVazio =DbConecction.GetDatable($@"select * from Clini_01 
             //                        WHERE CLINI_01_cpf IN (    
-        
+
             //                        select CLINI_01.Clini_01_CPF from CLINI_01 inner join
 
             //                        (select clini_01_cpf, COUNT(*) AS C from CLINI_01
@@ -109,7 +111,7 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"update DAT005 set FIELD = 'PCOD' where TABLENAME='clini_01'
+                DbConecction.ExecuteNonQueries($@"update DAT005 set FIELD = 'PCOD' where TABLENAME='clini_01'
                     
                 DECLARE @TABLENAME VARCHAR(255);
                 DECLARE @FIELDNAME VARCHAR(255);
@@ -145,7 +147,7 @@ namespace SupportTools
 
             
                 ");
-                
+
 
             }
             catch (Exception)
@@ -166,7 +168,7 @@ namespace SupportTools
             //DatabaseManager db = new DatabaseManager("Data Source=localhost\\SQLEXPRESS;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;");
             try
             {
-               DbConecction.ExecuteNonQueries($@"UPDATE FIN_02 SET CLOUD_SYNC_DATE = '2014-05-06 17:35:28.453', CLOUD_SYNC_ID = 2 WHERE TABLENAME = 'PROPTB_TUSS'
+                DbConecction.ExecuteNonQueries($@"UPDATE FIN_02 SET CLOUD_SYNC_DATE = '2014-05-06 17:35:28.453', CLOUD_SYNC_ID = 2 WHERE TABLENAME = 'PROPTB_TUSS'
 
                                             UPDATE PROPTB_TUSS SET CLOUD_SYNC_ID = 2 , CLOUD_SYNC_DATE = '2014-05-06 17:35:28.757' WHERE PROPTB_TUSS_ID = 1
                                             UPDATE PROPTB_TUSS SET CLOUD_SYNC_ID = 3 , CLOUD_SYNC_DATE = '2014-05-06 17:35:28.760' WHERE PROPTB_TUSS_ID = 2
@@ -5875,7 +5877,7 @@ namespace SupportTools
                                             UPDATE PROPTB_TUSS SET CLOUD_SYNC_ID = 5706 , CLOUD_SYNC_DATE = '2014-05-06 17:41:41.517' WHERE PROPTB_TUSS_ID = 5705
                                             UPDATE PROPTB_TUSS SET CLOUD_SYNC_ID = 5707 , CLOUD_SYNC_DATE = '2014-05-06 17:41:41.650' WHERE PROPTB_TUSS_ID = 5706
                                             UPDATE PROPTB_TUSS SET CLOUD_SYNC_ID = 5708 , CLOUD_SYNC_DATE = '2014-05-06 17:41:41.783' WHERE PROPTB_TUSS_ID = 5707");
-                
+
             }
 
             catch
@@ -6008,7 +6010,7 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"DELETE FROM RESUMO_PMED;
+                DbConecction.ExecuteNonQueries($@"DELETE FROM RESUMO_PMED;
                                             UPDATE CLINI_05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE AMB90 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE AMB92 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
@@ -6053,7 +6055,7 @@ namespace SupportTools
                                             UPDATE TISS009 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE SYS103 SET CLOUD_SYNC_ID = null;
                                             UPDATE TUSS001_TUSS SET CLOUD_SYNC_ID = null;"
-                );
+                 );
 
             }
             catch (Exception)
@@ -6067,9 +6069,9 @@ namespace SupportTools
             //DatabaseManager db = new DatabaseManager("Data Source=localhost\\SQLEXPRESS;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;");
             try
             {
-               DbConecction.ExecuteNonQueries($@"DELETE FROM RESUMO_PMED");
-               DbConecction.ExecuteNonQueries($@"DELETE FROM CLINI_01_LOCK");
-                
+                DbConecction.ExecuteNonQueries($@"DELETE FROM RESUMO_PMED");
+                DbConecction.ExecuteNonQueries($@"DELETE FROM CLINI_01_LOCK");
+
 
             }
             catch
@@ -6098,7 +6100,7 @@ namespace SupportTools
             //groupBox2.Visible = false;
             try
             {
-               DbConecction.ExecuteNonQueries($@"
+                DbConecction.ExecuteNonQueries($@"
                 DELETE FROM AGE03 WHERE AGE03_ID IN (
                 select AGE03.AGE03_ID from age03 inner join
                 (select data,inicio,usernumber, COUNT(*) AS C from AGE03
@@ -6129,7 +6131,7 @@ namespace SupportTools
 
             try
             {
-               DbConecction.ExecuteNonQueries($@"delete  from AGE04 where AGE03_ID not in (select AGE03_ID from AGE03)");
+                DbConecction.ExecuteNonQueries($@"delete  from AGE04 where AGE03_ID not in (select AGE03_ID from AGE03)");
                 MessageBox.Show("Deletados");
             }
             catch (Exception)
@@ -6148,7 +6150,7 @@ namespace SupportTools
 
             try
             {
-               DbConecction.ExecuteNonQueries($@"update CLINI_01 set Clini_01_CPF = NULL 
+                DbConecction.ExecuteNonQueries($@"update CLINI_01 set Clini_01_CPF = NULL 
     
                WHERE CLINI_01_cpf IN (    
     
@@ -6161,7 +6163,7 @@ namespace SupportTools
                on CLINI_01.Clini_01_CPF = duplicatas.Clini_01_CPF 
                WHERE
                CLINI_01.ATIVO='T')");
-                
+
 
             }
             catch (Exception)
@@ -6183,35 +6185,35 @@ namespace SupportTools
             var profUserNumber = comboBox1.SelectedValue;
             try
             {
-               DbConecction.ExecuteNonQueries($@"delete from GRUPO_USUARIO WHERE USERNUMBER IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from GRUPO_USUARIO WHERE USERNUMBER IN({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from PERMISSAO_USUARIO WHERE USERNUMBER IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from PERMISSAO_USUARIO WHERE USERNUMBER IN({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from SYS139_BACKUP where USERNUMBER in({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from SYS139_BACKUP where USERNUMBER in({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from US01 where USERNUMBER in({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from US01 where USERNUMBER in({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from AGE04 WHERE USERNUMBER IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from AGE04 WHERE USERNUMBER IN({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from AGE04 WHERE PROFESSIONALCOD IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from AGE04 WHERE PROFESSIONALCOD IN({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from AGE06 WHERE USERNUMBER IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from AGE06 WHERE USERNUMBER IN({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from AGE08 WHERE USERNUMBER IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from AGE08 WHERE USERNUMBER IN({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from SYS011 WHERE PROFESSIONALCOD IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from SYS011 WHERE PROFESSIONALCOD IN({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from CO19 WHERE USERNUMBER IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from CO19 WHERE USERNUMBER IN({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from CO22 WHERE USERNUMBER IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from CO22 WHERE USERNUMBER IN({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from CO28 WHERE USERNUMBER IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from CO28 WHERE USERNUMBER IN({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from ME WHERE USERNUMBER IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from ME WHERE USERNUMBER IN({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from CLINI_02 WHERE USERNUMBER IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from CLINI_02 WHERE USERNUMBER IN({profUserNumber})");
 
-               DbConecction.ExecuteNonQueries($@"delete from CLINI_04 WHERE USERNUMBER IN({profUserNumber})");
+                DbConecction.ExecuteNonQueries($@"delete from CLINI_04 WHERE USERNUMBER IN({profUserNumber})");
 
             }
             catch (Exception)
@@ -6237,7 +6239,7 @@ namespace SupportTools
                 //                        BEGIN
                 //                         ALTER TABLE dbo.CO19 ADD CLOUD_SYNC_DATE DATETIME;
                 //                        END");
-                
+
             }
             catch (Exception)
             {
@@ -6249,11 +6251,11 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO50') AND NAME = 'CLOUD_SYNC_DATE')
+                DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO50') AND NAME = 'CLOUD_SYNC_DATE')
                                                 BEGIN
 	                                                ALTER TABLE dbo.CO50 ADD CLOUD_SYNC_DATE DATETIME;
                                                 END");
-                
+
             }
             catch (Exception)
             {
@@ -6265,11 +6267,11 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO19') AND NAME = 'CLOUD_SYNC_ID')
+                DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO19') AND NAME = 'CLOUD_SYNC_ID')
                                             BEGIN
 	                                            ALTER TABLE dbo.CO19 ADD CLOUD_SYNC_ID INT;
                                             END");
-                
+
             }
             catch (Exception)
             {
@@ -6282,11 +6284,11 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO50') AND NAME = 'CLOUD_SYNC_ID')
+                DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO50') AND NAME = 'CLOUD_SYNC_ID')
                                                 BEGIN
 	                                                ALTER TABLE dbo.CO50 ADD CLOUD_SYNC_ID INT;
                                                 END");
-             }
+            }
             catch (Exception)
             {
                 MessageBox.Show("NÃO EXECUTADO! - ADD_COLUMN_CO50_CLOUD_SYNC_ID");
@@ -6297,7 +6299,7 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO51') AND NAME = 'CLOUD_SYNC_DATE')
+                DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO51') AND NAME = 'CLOUD_SYNC_DATE')
                                                     BEGIN
 	                                                    ALTER TABLE dbo.CO51 ADD CLOUD_SYNC_DATE DATETIME;
                                                     END
@@ -6306,7 +6308,7 @@ namespace SupportTools
                                                     BEGIN
 	                                                    ALTER TABLE dbo.CO51_1 ADD CLOUD_SYNC_DATE DATETIME;
                                                     END ");
-                
+
             }
             catch (Exception)
             {
@@ -6319,7 +6321,7 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO51') AND NAME = 'CLOUD_SYNC_ID')
+                DbConecction.ExecuteNonQueries($@"IF NOT EXISTS(SELECT 1 FROM SYSCOLUMNS WHERE ID = OBJECT_ID('CO51') AND NAME = 'CLOUD_SYNC_ID')
                                             BEGIN
 	                                            ALTER TABLE dbo.CO51 ADD CLOUD_SYNC_ID INT;
                                             END
@@ -6328,7 +6330,7 @@ namespace SupportTools
                                             BEGIN
 	                                            ALTER TABLE dbo.CO51_1 ADD CLOUD_SYNC_ID INT;
                                             END");
-                
+
             }
             catch (Exception)
             {
@@ -6341,7 +6343,7 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"USE [PersonalMed]
+                DbConecction.ExecuteNonQueries($@"USE [PersonalMed]
                                         DROP TABLE DAT005
 
                                         USE [PersonalMed]
@@ -6370,7 +6372,7 @@ namespace SupportTools
 
                                         SET ANSI_PADDING OFF
                                         GO");
-                
+
             }
             catch (Exception)
             {
@@ -6382,7 +6384,7 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"USE [PersonalMed]
+                DbConecction.ExecuteNonQueries($@"USE [PersonalMed]
                                         GO
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'AGE01', 1, N'AGE01', N'AGE01_ID')
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'AGE011_PRECADASTRO', 1, N'AGE011_PRECADASTRO', N'AGE011_ID')
@@ -6643,7 +6645,7 @@ namespace SupportTools
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'VAC_CFG', 32, N'VAC_CFG', N'CODIGO')
                                         INSERT [dbo].[DAT005] ([TABLENAME], [NEXTKEY], [TABLE], [FIELD]) VALUES (N'Val_Norm', 137, N'Val_Norm', N'titlecod')
                                         ");
-                
+
             }
             catch (Exception)
             {
@@ -6655,7 +6657,7 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"DECLARE @TABLENAME VARCHAR(255);
+                DbConecction.ExecuteNonQueries($@"DECLARE @TABLENAME VARCHAR(255);
                                             DECLARE @FIELDNAME VARCHAR(255);
                                             DECLARE @NEXTKEY INT;
                                             DECLARE @SQLString NVARCHAR(255);
@@ -6686,7 +6688,7 @@ namespace SupportTools
                                             END
                                             CLOSE CUR_TEMP
                                             DEALLOCATE CUR_TEMP");
-                
+
             }
             catch (Exception)
             {
@@ -6694,19 +6696,14 @@ namespace SupportTools
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void ListaCpfComCaracterEspecial(object sender, EventArgs e)
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@" CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
+                DbConecction.ExecuteNonQueries($@"update CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
                                                 where clini_01_cpf is not null
-                                            ");
-                
+                                            ", "ListaCpfComCaracterEspecial");
+
             }
             catch (Exception)
             {
@@ -6719,9 +6716,8 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"upda hhh set Clini_01_CPF = NULL
-                                            WHERE LEN(Clini_01_CPF) > 11");
-                
+                DbConecction.ExecuteNonQueries($@"update clini_01 set Clini_01_CPF = NULL
+                                            WHERE LEN(Clini_01_CPF) > 11", "ListaCpfMaiorQue11Caracteres");
             }
             catch (Exception)
             {
@@ -6732,9 +6728,10 @@ namespace SupportTools
 
         private void button12_Click(object sender, EventArgs e)
         {
+
             ManipularBotoes(false);
             //InitializeProgressBar();
-            
+
             progressBar1.Maximum = 18;
             progressBar1.Value = 0;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
@@ -6748,7 +6745,7 @@ namespace SupportTools
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            CorrecaoCaracterEspecialCpf(null,null);
+            CorrecaoCaracterEspecialCpf(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
@@ -6756,7 +6753,7 @@ namespace SupportTools
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            BtCorrecaoCpfMaiorQue11(null,null);
+            BtCorrecaoCpfMaiorQue11(null, null);
             progressBar1.Value += 1;
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
@@ -6813,8 +6810,7 @@ namespace SupportTools
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
             ManipularBotoes(true);
 
-            MessageBox.Show("CONCLUIDO COM SUCESSO");
-            
+
         }
 
         private void btApagarDuplicados_Click(object sender, EventArgs e)
@@ -6822,7 +6818,7 @@ namespace SupportTools
             //groupBox2.Visible = false;
             try
             {
-               DbConecction.ExecuteNonQueries($@"
+                DbConecction.ExecuteNonQueries($@"
                 DELETE FROM AGE03 WHERE AGE03_ID IN (
                 select AGE03.AGE03_ID from age03 inner join
                 (select data,inicio,usernumber, COUNT(*) AS C from AGE03
@@ -6835,7 +6831,7 @@ namespace SupportTools
                 AND AGE03.USERNUMBER = duplicatas.USERNUMBER
                 WHERE
                 AGE03.ATIVO='T'and age03.ATIVO='F')");
-                
+
             }
             catch (Exception)
             {
@@ -6852,8 +6848,8 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"delete  from AGE04 where AGE03_ID not in (select AGE03_ID from AGE03)");
-                
+                DbConecction.ExecuteNonQueries($@"delete from AGE04 where AGE03_ID not in (select AGE03_ID from AGE03)");
+
             }
             catch (Exception)
             {
@@ -6870,9 +6866,9 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"update clini_01  set Clini_01_CPF = NULL
+                DbConecction.ExecuteNonQueries($@"update clini_01  set Clini_01_CPF = NULL
                                             WHERE LEN(Clini_01_CPF) > 11");
-             }
+            }
             catch (Exception)
             {
 
@@ -6885,10 +6881,10 @@ namespace SupportTools
         {
             try
             {
-               DbConecction.ExecuteNonQueries($@"UPDATE CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
+                DbConecction.ExecuteNonQueries($@"UPDATE CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
                                                 where clini_01_cpf is not null
                                             ");
-                
+
             }
             catch (Exception)
             {
@@ -6896,7 +6892,19 @@ namespace SupportTools
                 MessageBox.Show("NÃO EXECUTADO! - CorrecaoCaracterEspecialCpf");
             }
         }
+
+        private void DeleteServico(object sender, EventArgs e)
+        {
+            string DeleteCloud = @"/C" + "net stop TOTVSCloudService";
+            string Mobilidade =  @"/C" + "sc delete TotvsUmovService";
+            string TotvsUpdate = @"/C" + "sc delete TotvsUpdateServer";
+
+            System.Diagnostics.Process.Start("CMD.exe", DeleteCloud);
+            System.Diagnostics.Process.Start("CMD.exe", Mobilidade);
+            System.Diagnostics.Process.Start("CMD.exe", TotvsUpdate);
+        }
     }
+
 }
 
 
