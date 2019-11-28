@@ -2,7 +2,10 @@
 using System;
 using System.Windows.Forms;
 using System.Diagnostics;
-
+using Microsoft.Win32;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SupportTools
 {
@@ -12,18 +15,43 @@ namespace SupportTools
         DatabaseManager DbConecction;
         public DatabaseManager ConectDB()
         {
-
             //Fabiano
             //DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\SQLEXPRESS;Password=totvs@123;Persist Security Info=True;User ID=sa;Initial Catalog=PersonalMed;");
-
             //Honatel
-            DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;Persist Security Info=True;User ID=sa;Initial Catalog=PersonalMed;");
-            
-
+            DatabaseManager BancoConectado = new DatabaseManager(GetConnectionString("PersonalMed.udl"));
+            //DatabaseManager BancoConectado = new DatabaseManager("Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;Persist Security Info=True;User ID=sa;Initial Catalog=PersonalMed;");
             //"Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;Integrated Security=True;Connect Timeout=999;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Initial Catalog=PersonalMed;"
             //"Data Source=localhost\\MSSQLSERVER14;Password=012345678@totvs123;Persist Security Info=True;User ID=sa;Initial Catalog=PersonalMed;" providerName = "System.Data.SqlClient"
-
             return BancoConectado;
+        }
+
+        public static string GetPersonalPath()
+        {
+            RegistryKey key2 = Registry.LocalMachine.OpenSubKey("SOFTWARE\\GENS\\Personal Med");
+
+            if (key2 == null)
+                key2 = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\GENS\\Personal Med");
+
+            return key2.GetValue("ApplicationPath").ToString();
+        }
+
+
+        public static string GetConnectionString(string udl)
+        {
+            string appPath = GetPersonalPath();
+            string file = Path.Combine(appPath, udl);
+
+            IniFile ini = new IniFile(file);
+
+            string a = ini.IniReadValue("oledb", "Provider");
+
+            List<string> lista = a.Split(';').ToList();
+
+            lista.RemoveAt(0);
+
+            a = String.Join(";", lista.ToArray());
+
+            return a;
         }
 
         public Form1()

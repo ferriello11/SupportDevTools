@@ -32,7 +32,6 @@ C:\Projetos\SupportDevTools\SupportTools\obj\Debug\SupportTools.exe
 C:\Projetos\SupportDevTools\SupportTools\obj\Debug\SupportTools.pdb
 C:\Projetos\SupportDevTools\SupportTools\bin\Debug\SupportTools.exe
 C:\Projetos\SupportDevTools\SupportTools\bin\Debug\SupportTools.pdb
-C:\Projetos\SupportDevTools\SupportTools\obj\Debug\SupportTools.csprojResolveAssemblyReference.cache
 C:\Projetos\SupportDevTools\SupportTools\obj\Debug\SupportTools.Form1.resources
 C:\Projetos\SupportDevTools\SupportTools\obj\Debug\SupportTools.Properties.Resources.resources
 C:\Projetos\SupportDevTools\SupportTools\obj\Debug\SupportTools.csproj.GenerateResource.Cache
