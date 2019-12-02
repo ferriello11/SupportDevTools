@@ -45,3 +45,4 @@ C:\Projeto Fabiano\SupportDevTools\SupportTools\obj\Debug\SupportTools.csproj.Co
 C:\Projeto Fabiano\SupportDevTools\SupportTools\obj\Debug\SupportTools.exe
 C:\Projeto Fabiano\SupportDevTools\SupportTools\obj\Debug\SupportTools.pdb
 C:\Projeto Fabiano\SupportDevTools\SupportTools\obj\Debug\SupportTools.csprojAssemblyReference.cache
+C:\Projetos\SupportDevTools\SupportTools\obj\Debug\SupportTools.csprojResolveAssemblyReference.cache

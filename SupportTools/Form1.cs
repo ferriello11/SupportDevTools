@@ -91,49 +91,7 @@ namespace SupportTools
             comboBox2.DataSource = ItensDuplicados;
             comboBox2.DisplayMember = "Data";
 
-            //var CpfPacienteVazio =DbConecction.GetDatable($@"select * from Clini_01 
-            //                        WHERE CLINI_01_cpf IN (    
-
-            //                        select CLINI_01.Clini_01_CPF from CLINI_01 inner join
-
-            //                        (select clini_01_cpf, COUNT(*) AS C from CLINI_01
-            //                        where ATIVO = 'T' and Clini_01_CPF = ''
-            //                        group by clini_01_cpf
-            //                        having COUNT (*) > 1) duplicatas 
-            //                        on CLINI_01.Clini_01_CPF = duplicatas.Clini_01_CPF 
-            //                        WHERE
-            //                        CLINI_01.ATIVO='T')");
-            //comboBox3.DataSource = CpfPacienteVazio;
-            //comboBox3.DisplayMember = "Name";
-
-            //var CpfPaciente =DbConecction.GetDatable($@"select * from Clini_01 
-            //                        WHERE CLINI_01_cpf IN (    
-
-            //                        select CLINI_01.Clini_01_CPF from CLINI_01 inner join
-
-            //                        (select clini_01_cpf, COUNT(*) AS C from CLINI_01
-            //                        where ATIVO = 'T' and Clini_01_CPF != ''
-            //                        group by clini_01_cpf
-            //                        having COUNT (*) > 1) duplicatas 
-            //                        on CLINI_01.Clini_01_CPF = duplicatas.Clini_01_CPF 
-            //                        WHERE
-            //                        CLINI_01.ATIVO='T')");
-            //comboBox4.DataSource = CpfPaciente;
-            //comboBox4.DisplayMember = "Name";
-
-            //var CpfInvalido = DbConecction.GetDatable($@"select replace (REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '') ,clini_01_cpf 
-            //                        from CLINI_01 
-            //                        where clini_01_cpf is not null");
-
-            //comboBox5.DataSource = CpfInvalido;
-            //comboBox5.DisplayMember = "clini_01_cpf";
-
-            //var CpfMaiorQueDoze = DbConecction.GetDatable($@"SELECT Clini_01_CPF,*
-            //                        FROM clini_01
-            //                        WHERE LEN (Clini_01_CPF) > 11");
-
-            //comboBox6.DataSource = CpfMaiorQueDoze;
-            //comboBox6.DisplayMember = "Clini_01_CPF";
+            
 
 
         }
@@ -185,13 +143,7 @@ namespace SupportTools
             {
                 MessageBox.Show("NÃO EXECUTADO - DAT005");
             }
-
-
-
-
-
-
-
+            
         }
 
         private void UPDATE_TUSS(object sender, EventArgs e)
@@ -6049,14 +6001,15 @@ namespace SupportTools
                                             UPDATE CIEFAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE PROPTB_TUSS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE PROPTB59 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                            UPDATE PROPTB60 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            ");
+                DbConecction.ExecuteNonQueries($@"UPDATE PROPTB60 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE PROPTB61 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE PROPTB62 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE PROPTB63 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE PROPTB64 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE PROPTB65 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                            UPDATE AGE011_PRECADASTRO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                            UPDATE AGE02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE AGE011_PRECADASTRO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;");
+                DbConecction.ExecuteNonQueries($@"UPDATE AGE02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE AGE03 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE AGE04 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE AGE05 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
@@ -6065,8 +6018,8 @@ namespace SupportTools
                                             UPDATE CLINI_01 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE CLINI_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE CO12_1 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                            UPDATE CO12_2 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                            UPDATE CO25 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CO12_2 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;");
+                DbConecction.ExecuteNonQueries($@"UPDATE CO25 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE CO28 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE CONTA_MATERIAIS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE CONTA_MEDICAMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
@@ -6074,8 +6027,8 @@ namespace SupportTools
                                             UPDATE CONTA_PACOTES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE CONTA_PROCEDIMENTOS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE CONTA_PROCEDIMENTOS_PROFISSIONAL SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                            UPDATE CONTA_TAXAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
-                                            UPDATE FIN_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
+                                            UPDATE CONTA_TAXAS SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;");
+                DbConecction.ExecuteNonQueries($@"UPDATE FIN_02 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE FIN_51 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE FUNCOES_REPASSES SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE LOCAL_ATENDIMENTO SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
@@ -6085,8 +6038,8 @@ namespace SupportTools
                                             UPDATE SYS099 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE TISS009 SET CLOUD_SYNC_DATE = null, CLOUD_SYNC_ID = null;
                                             UPDATE SYS103 SET CLOUD_SYNC_ID = null;
-                                            UPDATE TUSS001_TUSS SET CLOUD_SYNC_ID = null;"
-                 );
+                                            UPDATE TUSS001_TUSS SET CLOUD_SYNC_ID = null;");
+                 
 
             }
             catch (Exception)
@@ -6150,11 +6103,6 @@ namespace SupportTools
             {
                 MessageBox.Show("Execute mais uma vez");
             }
-            finally
-            {
-                comboBox2.SelectedIndex = -1;
-                AtualizarCombo();
-            }
         }
 
         private void DeletaAgendamentosAge04(object sender, EventArgs e)
@@ -6169,47 +6117,9 @@ namespace SupportTools
             {
                 MessageBox.Show("Execute mais uma vez");
             }
-            finally
-            {
-                comboBox2.SelectedIndex = -1;
-                AtualizarCombo();
-            }
+           
         }
-
-        private void CorrigeCpfDuplicado(object sender, EventArgs e)
-        {
-
-            try
-            {
-                DbConecction.ExecuteNonQueries($@"update CLINI_01 set Clini_01_CPF = NULL 
-    
-               WHERE CLINI_01_cpf IN (    
-    
-               select CLINI_01.Clini_01_CPF from CLINI_01 inner join
-    
-               (select clini_01_cpf, COUNT(*) AS C from CLINI_01
-               where ATIVO = 'T' 
-               group by clini_01_cpf
-               having COUNT (*) > 1) duplicatas 
-               on CLINI_01.Clini_01_CPF = duplicatas.Clini_01_CPF 
-               WHERE
-               CLINI_01.ATIVO='T')");
-
-
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("NÃO EXECUTADO! - CorrigeCpfDuplicado");
-            }
-            finally
-            {
-                comboBox3.SelectedIndex = -1;
-                comboBox4.SelectedIndex = -1;
-                AtualizarCombo();
-            }
-
-        }
-
+              
         private void DeletarMedico(object sender, EventArgs e)
         {
 
@@ -6250,7 +6160,6 @@ namespace SupportTools
             catch (Exception)
             {
                 MessageBox.Show("NÃO EXECUTADO! - DeletarMedico");
-
             }
             AtualizarCombo();
         }
@@ -6719,42 +6628,12 @@ namespace SupportTools
             }
         }
 
-        private void ListaCpfComCaracterEspecial(object sender, EventArgs e)
-        {
-            try
-            {
-                DbConecction.ExecuteNonQueries($@"update CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
-                                                where clini_01_cpf is not null
-                                            ", "ListaCpfComCaracterEspecial");
-
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("NÃO EXECUTADO! - ListaCpfComCaracterEspecial");
-            }
-        }
-
-        private void ListaCpfMaiorQue11Caracteres(object sender, EventArgs e)
-        {
-            try
-            {
-                DbConecction.ExecuteNonQueries($@"update clini_01 set Clini_01_CPF = NULL
-                                            WHERE LEN(Clini_01_CPF) > 11", "ListaCpfMaiorQue11Caracteres");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("NÃO EXECUTADO! - ListaCpfMaiorQue11Caracteres");
-            }
-
-        }
-
         private void button12_Click(object sender, EventArgs e)
         {
             DbConecction.OpenConection();
             ManipularBotoes(false);
 
-            progressBar1.Maximum = 18;
+            progressBar1.Maximum = 16;
             progressBar1.Value = 0;
             label6.Refresh(); 
             label6.Text = "Progresso";
@@ -6764,22 +6643,12 @@ namespace SupportTools
             label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            btApagarAge04_Click(null, null);
+            btDeleteAge04_Click(null, null);
             progressBar1.Value += 1;
             label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
-
-            CorrecaoCaracterEspecialCpf(null, null);
-            progressBar1.Value += 1;
-            label6.Refresh();
-            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
-
-            ListaCpfMaiorQue11Caracteres(null, null);
-            progressBar1.Value += 1;
-            label6.Refresh();
-            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
-
-            BtCorrecaoCpfMaiorQue11(null, null);
+            
+            CorrigiCPF(null, null);
             progressBar1.Value += 1;
             label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
@@ -6878,8 +6747,55 @@ namespace SupportTools
                 MessageBox.Show("NÃO EXECUTE! - btApagarDuplicados_Click/ " + ex.Message);
             }
         }
+        
+        private void DeleteServico(object sender, EventArgs e)
+        {
+            string DeleteCloud = @"/C" + "net stop TOTVSCloudService";
+            string Mobilidade =  @"/C" + "sc delete TotvsUmovService";
+            string TotvsUpdate = @"/C" + "sc delete TotvsUpdateServer";
 
-        private void btApagarAge04_Click(object sender, EventArgs e)
+            System.Diagnostics.Process.Start("CMD.exe", DeleteCloud);
+            System.Diagnostics.Process.Start("CMD.exe", Mobilidade);
+            System.Diagnostics.Process.Start("CMD.exe", TotvsUpdate);
+        }
+
+        private void CorrigiCPF(object sender, EventArgs e)
+        {
+            try
+            {
+
+                //CORREÇÃO CPF DUPLICADO
+                DbConecction.ExecuteNonQueries($@"update CLINI_01 set Clini_01_CPF = NULL 
+                WHERE CLINI_01_cpf IN (    
+                select CLINI_01.Clini_01_CPF from CLINI_01 inner join
+                (select clini_01_cpf, COUNT(*) AS C from CLINI_01
+                where ATIVO = 'T' 
+                group by clini_01_cpf
+                having COUNT (*) > 1) duplicatas 
+                on CLINI_01.Clini_01_CPF = duplicatas.Clini_01_CPF 
+                WHERE
+                CLINI_01.ATIVO='T')");
+
+                //CORREÇÃO CPF VAZIO
+                DbConecction.ExecuteNonQueries($@"update clini_01  set Clini_01_CPF = null where clini_01_cpf = '' ");
+
+                //CORREÇÃO CPF MAIOR QUE 11
+                DbConecction.ExecuteNonQueries($@"update clini_01  set Clini_01_CPF = NULL
+                                                    WHERE LEN(Clini_01_CPF) > 11");
+                //Correcao Caracter Especial
+                DbConecction.ExecuteNonQueries($@"UPDATE CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
+                                                where clini_01_cpf is not null
+                                            ");
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("NÃO EXECUTADO! - CorrigiCPF");
+            }
+          
+        }
+
+        private void btDeleteAge04_Click(object sender, EventArgs e)
         {
             try
             {
@@ -6890,52 +6806,7 @@ namespace SupportTools
             {
                 MessageBox.Show("NÃO EXECUTADO! - btApagarAge04_Click");
             }
-            finally
-            {
-                comboBox2.SelectedIndex = -1;
-                AtualizarCombo();
-            }
-        }
-
-        private void BtCorrecaoCpfMaiorQue11(object sender, EventArgs e)
-        {
-            try
-            {
-                DbConecction.ExecuteNonQueries($@"update clini_01  set Clini_01_CPF = NULL
-                                            WHERE LEN(Clini_01_CPF) > 11");
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("");
-                MessageBox.Show("NÃO EXECUTADO! - BtCorrecaoCpfMaiorQue11");
-            }
-        }
-
-        private void CorrecaoCaracterEspecialCpf(object sender, EventArgs e)
-        {
-            try
-            {
-                DbConecction.ExecuteNonQueries($@"UPDATE CLINI_01 SET clini_01_cpf = REPLACE(REPLACE(REPLACE(clini_01_cpf,'.',''),'-',''), ' ', '')
-                                                where clini_01_cpf is not null
-                                            ");
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("NÃO EXECUTADO! - CorrecaoCaracterEspecialCpf");
-            }
-        }
-
-        private void DeleteServico(object sender, EventArgs e)
-        {
-            string DeleteCloud = @"/C" + "net stop TOTVSCloudService";
-            string Mobilidade =  @"/C" + "sc delete TotvsUmovService";
-            string TotvsUpdate = @"/C" + "sc delete TotvsUpdateServer";
-
-            System.Diagnostics.Process.Start("CMD.exe", DeleteCloud);
-            System.Diagnostics.Process.Start("CMD.exe", Mobilidade);
-            System.Diagnostics.Process.Start("CMD.exe", TotvsUpdate);
+           
         }
     }
 
