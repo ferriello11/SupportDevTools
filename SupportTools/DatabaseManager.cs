@@ -35,12 +35,12 @@ namespace SupportDataBase
 
         public void ExecuteNonQueries(string Query_, string method = "")
         {
-            SqlCommand cmd = new SqlCommand(Query_, con);
             try
             {
-                //OpenConection();
+                OpenConection();
+                SqlCommand cmd = new SqlCommand(Query_, con);
                 cmd.ExecuteNonQuery();
-                //CloseConnection();
+                CloseConnection();
             }
             catch (Exception ex)
             {

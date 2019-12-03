@@ -31,15 +31,13 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btDeleteAge04 = new System.Windows.Forms.Button();
+            this.ChaveTxt = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.button12 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.btApagarDuplicados = new System.Windows.Forms.Button();
             this.btCo19Date = new System.Windows.Forms.Button();
             this.btDeleteResumo = new System.Windows.Forms.Button();
@@ -61,6 +59,8 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btApagaMedico = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.btAjustaChave = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabPage5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -75,19 +75,20 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(638, 648);
+            this.tabPage5.Size = new System.Drawing.Size(807, 589);
             this.tabPage5.TabIndex = 5;
             this.tabPage5.Text = "12.1.16 SCRIPTS SINCRONISMO";
             this.tabPage5.UseVisualStyleBackColor = true;
+            this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btDeleteAge04);
+            this.panel1.Controls.Add(this.btAjustaChave);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.ChaveTxt);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.button14);
             this.panel1.Controls.Add(this.groupBox2);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.comboBox2);
             this.panel1.Controls.Add(this.btApagarDuplicados);
             this.panel1.Controls.Add(this.btCo19Date);
             this.panel1.Controls.Add(this.btDeleteResumo);
@@ -102,26 +103,25 @@
             this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.button9);
             this.panel1.Controls.Add(this.button8);
-            this.panel1.Location = new System.Drawing.Point(6, 6);
+            this.panel1.Location = new System.Drawing.Point(6, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(626, 636);
+            this.panel1.Size = new System.Drawing.Size(792, 570);
             this.panel1.TabIndex = 31;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // btDeleteAge04
+            // ChaveTxt
             // 
-            this.btDeleteAge04.Location = new System.Drawing.Point(357, 98);
-            this.btDeleteAge04.Name = "btDeleteAge04";
-            this.btDeleteAge04.Size = new System.Drawing.Size(223, 23);
-            this.btDeleteAge04.TabIndex = 52;
-            this.btDeleteAge04.Text = "DELETE AGE04";
-            this.btDeleteAge04.UseVisualStyleBackColor = true;
-            this.btDeleteAge04.Click += new System.EventHandler(this.btDeleteAge04_Click);
+            this.ChaveTxt.Location = new System.Drawing.Point(16, 250);
+            this.ChaveTxt.Name = "ChaveTxt";
+            this.ChaveTxt.Size = new System.Drawing.Size(501, 272);
+            this.ChaveTxt.TabIndex = 53;
+            this.ChaveTxt.Text = "";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(357, 131);
+            this.button1.Location = new System.Drawing.Point(529, 16);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(223, 23);
+            this.button1.Size = new System.Drawing.Size(242, 27);
             this.button1.TabIndex = 47;
             this.button1.Text = "CORRIGIR CPF";
             this.button1.UseVisualStyleBackColor = true;
@@ -129,9 +129,9 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(357, 160);
+            this.button14.Location = new System.Drawing.Point(529, 42);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(223, 23);
+            this.button14.Size = new System.Drawing.Size(242, 36);
             this.button14.TabIndex = 44;
             this.button14.Text = "Delete Servico";
             this.button14.UseVisualStyleBackColor = true;
@@ -142,16 +142,16 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.progressBar1);
             this.groupBox2.Controls.Add(this.button12);
-            this.groupBox2.Location = new System.Drawing.Point(283, 320);
+            this.groupBox2.Location = new System.Drawing.Point(523, 132);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(297, 131);
+            this.groupBox2.Size = new System.Drawing.Size(261, 83);
             this.groupBox2.TabIndex = 43;
             this.groupBox2.TabStop = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 70);
+            this.label6.Location = new System.Drawing.Point(3, 46);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(54, 13);
             this.label6.TabIndex = 3;
@@ -159,43 +159,26 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(24, 97);
+            this.progressBar1.Location = new System.Drawing.Point(6, 62);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(251, 15);
             this.progressBar1.TabIndex = 2;
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(89, 19);
+            this.button12.Location = new System.Drawing.Point(6, 10);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(112, 33);
+            this.button12.Size = new System.Drawing.Size(242, 33);
             this.button12.TabIndex = 0;
             this.button12.Text = "Execute all";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(357, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(153, 13);
-            this.label3.TabIndex = 38;
-            this.label3.Text = "Lista Compromissos duplicados";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(357, 35);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(223, 21);
-            this.comboBox2.TabIndex = 33;
-            // 
             // btApagarDuplicados
             // 
-            this.btApagarDuplicados.Location = new System.Drawing.Point(357, 62);
+            this.btApagarDuplicados.Location = new System.Drawing.Point(275, 185);
             this.btApagarDuplicados.Name = "btApagarDuplicados";
-            this.btApagarDuplicados.Size = new System.Drawing.Size(223, 30);
+            this.btApagarDuplicados.Size = new System.Drawing.Size(242, 30);
             this.btApagarDuplicados.TabIndex = 31;
             this.btApagarDuplicados.Text = "DELETAR AGENDAMENTO DUPLICADO";
             this.btApagarDuplicados.UseVisualStyleBackColor = true;
@@ -213,7 +196,7 @@
             // 
             // btDeleteResumo
             // 
-            this.btDeleteResumo.Location = new System.Drawing.Point(16, 370);
+            this.btDeleteResumo.Location = new System.Drawing.Point(275, 93);
             this.btDeleteResumo.Name = "btDeleteResumo";
             this.btDeleteResumo.Size = new System.Drawing.Size(242, 45);
             this.btDeleteResumo.TabIndex = 30;
@@ -233,7 +216,7 @@
             // 
             // btResetNuvem
             // 
-            this.btResetNuvem.Location = new System.Drawing.Point(16, 341);
+            this.btResetNuvem.Location = new System.Drawing.Point(275, 65);
             this.btResetNuvem.Name = "btResetNuvem";
             this.btResetNuvem.Size = new System.Drawing.Size(242, 30);
             this.btResetNuvem.TabIndex = 29;
@@ -253,7 +236,7 @@
             // 
             // btUpdateTuss
             // 
-            this.btUpdateTuss.Location = new System.Drawing.Point(16, 312);
+            this.btUpdateTuss.Location = new System.Drawing.Point(275, 45);
             this.btUpdateTuss.Name = "btUpdateTuss";
             this.btUpdateTuss.Size = new System.Drawing.Size(242, 29);
             this.btUpdateTuss.TabIndex = 28;
@@ -273,7 +256,7 @@
             // 
             // btDat005
             // 
-            this.btDat005.Location = new System.Drawing.Point(16, 283);
+            this.btDat005.Location = new System.Drawing.Point(275, 16);
             this.btDat005.Name = "btDat005";
             this.btDat005.Size = new System.Drawing.Size(242, 33);
             this.btDat005.TabIndex = 27;
@@ -293,7 +276,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(16, 239);
+            this.button10.Location = new System.Drawing.Point(16, 184);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(242, 31);
             this.button10.TabIndex = 16;
@@ -313,7 +296,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(16, 212);
+            this.button9.Location = new System.Drawing.Point(275, 159);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(242, 31);
             this.button9.TabIndex = 15;
@@ -323,7 +306,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(16, 187);
+            this.button8.Location = new System.Drawing.Point(275, 131);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(242, 31);
             this.button8.TabIndex = 14;
@@ -339,7 +322,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(638, 648);
+            this.tabPage2.Size = new System.Drawing.Size(821, 583);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "Deletar Médico";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -404,14 +387,33 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(646, 674);
+            this.tabControl1.Size = new System.Drawing.Size(815, 615);
             this.tabControl1.TabIndex = 0;
+            // 
+            // btAjustaChave
+            // 
+            this.btAjustaChave.Location = new System.Drawing.Point(16, 528);
+            this.btAjustaChave.Name = "btAjustaChave";
+            this.btAjustaChave.Size = new System.Drawing.Size(128, 23);
+            this.btAjustaChave.TabIndex = 55;
+            this.btAjustaChave.Text = "AJUSTA CHAVE";
+            this.btAjustaChave.UseVisualStyleBackColor = true;
+            this.btAjustaChave.Click += new System.EventHandler(this.btAjustaChave_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 231);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(120, 13);
+            this.label1.TabIndex = 54;
+            this.label1.Text = "ATUALIZAÇÃO CHAVE";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 737);
+            this.ClientSize = new System.Drawing.Size(831, 640);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Tools";
@@ -437,8 +439,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button btApagarDuplicados;
         private System.Windows.Forms.Button btCo19Date;
         private System.Windows.Forms.Button btDeleteResumo;
@@ -461,7 +461,9 @@
         private System.Windows.Forms.Button btApagaMedico;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btDeleteAge04;
+        private System.Windows.Forms.RichTextBox ChaveTxt;
+        private System.Windows.Forms.Button btAjustaChave;
+        private System.Windows.Forms.Label label1;
     }
 }
 

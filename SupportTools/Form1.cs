@@ -74,27 +74,7 @@ namespace SupportTools
             comboBox1.DataSource = us01Items;
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "UserNumber";
-
-            var ItensDuplicados = DbConecction.GetDatable($@"select * FROM AGE03 WHERE AGE03_ID IN (
-                                    select AGE03.AGE03_ID from age03 inner join
-                                    (select data,inicio,usernumber, COUNT(*) AS C from AGE03
-                                    where ATIVO = 'T' and ATIVO = 'F'
-                                    group by DATA,INICIO,USERNUMBER
-                                    having COUNT (*) > 1) duplicatas 
-
-                                    on age03.DATA = duplicatas.DATA 
-                                    AND AGE03.INICIO = duplicatas.INICIO 
-                                    AND AGE03.USERNUMBER = duplicatas.USERNUMBER
-                                    WHERE
-                                    AGE03.ATIVO='T' and AGE03.ATIVO='F')");
-
-            comboBox2.DataSource = ItensDuplicados;
-            comboBox2.DisplayMember = "Data";
-
-            
-
-
-        }
+         }
 
         private void DAT005(object sender, EventArgs e)
         {
@@ -6633,7 +6613,7 @@ namespace SupportTools
             DbConecction.OpenConection();
             ManipularBotoes(false);
 
-            progressBar1.Maximum = 16;
+            progressBar1.Maximum = 15;
             progressBar1.Value = 0;
             label6.Refresh(); 
             label6.Text = "Progresso";
@@ -6643,11 +6623,6 @@ namespace SupportTools
             label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            btDeleteAge04_Click(null, null);
-            progressBar1.Value += 1;
-            label6.Refresh();
-            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
-            
             CorrigiCPF(null, null);
             progressBar1.Value += 1;
             label6.Refresh();
@@ -6741,6 +6716,8 @@ namespace SupportTools
                 WHERE
                 AGE03.ATIVO='T'and age03.ATIVO='F')");
 
+                DbConecction.ExecuteNonQueries($@"delete from AGE04 where AGE03_ID not in (select AGE03_ID from AGE03)");
+
             }
             catch (Exception ex)
             {
@@ -6794,19 +6771,27 @@ namespace SupportTools
             }
           
         }
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
 
-        private void btDeleteAge04_Click(object sender, EventArgs e)
+        }
+
+        private void btAjustaChave_Click(object sender, EventArgs e)
         {
             try
             {
-                DbConecction.ExecuteNonQueries($@"delete from AGE04 where AGE03_ID not in (select AGE03_ID from AGE03)");
-
+                ConectDB().ExecuteNonQueries($@"update LICENSE_SERVER set chave = '{ChaveTxt.Text}' ");
+                ChaveTxt.Text = "";
             }
             catch (Exception)
             {
-                MessageBox.Show("NÃO EXECUTADO! - btApagarAge04_Click");
+                MessageBox.Show("ERRO AO ATUALIZAR A CHAVE");
             }
-           
+        } 
+
+        private void tabPage5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
