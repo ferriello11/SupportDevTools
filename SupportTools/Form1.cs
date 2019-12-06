@@ -60,21 +60,34 @@ namespace SupportTools
             DbConecction = ConectDB();
             InitializeComponent();
             AtualizarCombo();
+           
         }
 
         private void ManipularBotoes(bool enabled)
         {
             panel1.Enabled = enabled;
+            
         }
 
         private void AtualizarCombo()
         {
-            var us01Items = DbConecction.GetDatable("select * from us01 where usertype = 'M'");
+            var us01Items = DbConecction.GetDatable($@"select * from us01 where usertype = 'M'");
 
             comboBox1.DataSource = us01Items;
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "UserNumber";
-         }
+
+            var NumeroSerie = DbConecction.GetDatable($@"select numero_serie from cfg01");
+            NumeroSerieAtual.DataSource = NumeroSerie;
+            NumeroSerieAtual.DisplayMember = "Numero_Serie";
+
+            var Email = DbConecction.GetDatable($@"SELECT email,* FROM SYS011 WHERE ATIVO = 'T' AND PROFESSIONALCOD IN (SELECT USERNUMBER FROM US01 WHERE USERTYPE = 'm' AND ATIVO = 'T')");
+
+            Emails.DataSource = Email;
+            Emails.DisplayMember = "EMAIL";
+
+
+        }
 
         private void DAT005(object sender, EventArgs e)
         {
@@ -6778,20 +6791,51 @@ namespace SupportTools
 
         private void btAjustaChave_Click(object sender, EventArgs e)
         {
-            try
+            if (ChaveTxt.Text == "" || ChaveTxt.Text == null)
             {
-                ConectDB().ExecuteNonQueries($@"update LICENSE_SERVER set chave = '{ChaveTxt.Text}' ");
-                ChaveTxt.Text = "";
+                AtualizarCombo();
             }
-            catch (Exception)
+            else if (ChaveTxt.Text != "" || ChaveTxt.Text != null) 
             {
-                MessageBox.Show("ERRO AO ATUALIZAR A CHAVE");
+                try
+                {
+                    ConectDB().ExecuteNonQueries($@"update LICENSE_SERVER set chave = '{ChaveTxt.Text}' ");
+                    ChaveTxt.Text = "";
+
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("ERRO AO ATUALIZAR A CHAVE");
+                }
             }
         } 
 
         private void tabPage5_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btAtualizaNum_Serie_Click(object sender, EventArgs e)
+        {
+            if (Numero_Serie.Text == "" || Numero_Serie.Text == null)
+            {
+                AtualizarCombo();
+            }
+            else if (Numero_Serie.Text != "" || Numero_Serie.Text != null)
+            {
+                try
+                {
+
+                    ConectDB().ExecuteNonQueries($@"update CFG01 set NUMERO_SERIE = '{Numero_Serie.Text}' ");
+                    ChaveTxt.Text = "";
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("ERRO AO ATUALIZAR NUMERO DE SERIE");
+                }
+            }
         }
     }
 

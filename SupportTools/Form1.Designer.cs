@@ -31,6 +31,13 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.NumeroSerieAtual = new System.Windows.Forms.ComboBox();
+            this.btAtualizaNum_Serie = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Numero_Serie = new System.Windows.Forms.TextBox();
+            this.btAjustaChave = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.ChaveTxt = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
@@ -59,8 +66,8 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btApagaMedico = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.btAjustaChave = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.Emails = new System.Windows.Forms.ComboBox();
             this.tabPage5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -75,7 +82,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(807, 589);
+            this.tabPage5.Size = new System.Drawing.Size(807, 644);
             this.tabPage5.TabIndex = 5;
             this.tabPage5.Text = "12.1.16 SCRIPTS SINCRONISMO";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -83,6 +90,13 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.Emails);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.NumeroSerieAtual);
+            this.panel1.Controls.Add(this.btAtualizaNum_Serie);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.Numero_Serie);
             this.panel1.Controls.Add(this.btAjustaChave);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.ChaveTxt);
@@ -105,9 +119,71 @@
             this.panel1.Controls.Add(this.button8);
             this.panel1.Location = new System.Drawing.Point(6, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(792, 570);
+            this.panel1.Size = new System.Drawing.Size(792, 634);
             this.panel1.TabIndex = 31;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(520, 250);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(108, 13);
+            this.label3.TabIndex = 60;
+            this.label3.Text = "NUMERO DE SERIE";
+            // 
+            // NumeroSerieAtual
+            // 
+            this.NumeroSerieAtual.FormattingEnabled = true;
+            this.NumeroSerieAtual.Location = new System.Drawing.Point(523, 269);
+            this.NumeroSerieAtual.Name = "NumeroSerieAtual";
+            this.NumeroSerieAtual.Size = new System.Drawing.Size(242, 21);
+            this.NumeroSerieAtual.TabIndex = 59;
+            // 
+            // btAtualizaNum_Serie
+            // 
+            this.btAtualizaNum_Serie.Location = new System.Drawing.Point(523, 350);
+            this.btAtualizaNum_Serie.Name = "btAtualizaNum_Serie";
+            this.btAtualizaNum_Serie.Size = new System.Drawing.Size(128, 23);
+            this.btAtualizaNum_Serie.TabIndex = 58;
+            this.btAtualizaNum_Serie.Text = "ATUALIZAR";
+            this.btAtualizaNum_Serie.UseVisualStyleBackColor = true;
+            this.btAtualizaNum_Serie.Click += new System.EventHandler(this.btAtualizaNum_Serie_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(520, 307);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(170, 13);
+            this.label2.TabIndex = 57;
+            this.label2.Text = "ATUALIZAÇÃO NUMERO_SERIE";
+            // 
+            // Numero_Serie
+            // 
+            this.Numero_Serie.Location = new System.Drawing.Point(523, 323);
+            this.Numero_Serie.Name = "Numero_Serie";
+            this.Numero_Serie.Size = new System.Drawing.Size(242, 20);
+            this.Numero_Serie.TabIndex = 56;
+            // 
+            // btAjustaChave
+            // 
+            this.btAjustaChave.Location = new System.Drawing.Point(16, 528);
+            this.btAjustaChave.Name = "btAjustaChave";
+            this.btAjustaChave.Size = new System.Drawing.Size(128, 23);
+            this.btAjustaChave.TabIndex = 55;
+            this.btAjustaChave.Text = "AJUSTA CHAVE";
+            this.btAjustaChave.UseVisualStyleBackColor = true;
+            this.btAjustaChave.Click += new System.EventHandler(this.btAjustaChave_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 231);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(120, 13);
+            this.label1.TabIndex = 54;
+            this.label1.Text = "ATUALIZAÇÃO CHAVE";
             // 
             // ChaveTxt
             // 
@@ -170,7 +246,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(242, 33);
             this.button12.TabIndex = 0;
-            this.button12.Text = "Execute all";
+            this.button12.Text = "EXECUTE ALL";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -322,7 +398,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(821, 583);
+            this.tabPage2.Size = new System.Drawing.Size(807, 589);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "Deletar Médico";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -387,33 +463,31 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(815, 615);
+            this.tabControl1.Size = new System.Drawing.Size(815, 670);
             this.tabControl1.TabIndex = 0;
             // 
-            // btAjustaChave
+            // label4
             // 
-            this.btAjustaChave.Location = new System.Drawing.Point(16, 528);
-            this.btAjustaChave.Name = "btAjustaChave";
-            this.btAjustaChave.Size = new System.Drawing.Size(128, 23);
-            this.btAjustaChave.TabIndex = 55;
-            this.btAjustaChave.Text = "AJUSTA CHAVE";
-            this.btAjustaChave.UseVisualStyleBackColor = true;
-            this.btAjustaChave.Click += new System.EventHandler(this.btAjustaChave_Click);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(523, 389);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(117, 13);
+            this.label4.TabIndex = 61;
+            this.label4.Text = "EMAIL DOS MÉDICOS";
             // 
-            // label1
+            // Emails
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 231);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 13);
-            this.label1.TabIndex = 54;
-            this.label1.Text = "ATUALIZAÇÃO CHAVE";
+            this.Emails.FormattingEnabled = true;
+            this.Emails.Location = new System.Drawing.Point(523, 405);
+            this.Emails.Name = "Emails";
+            this.Emails.Size = new System.Drawing.Size(242, 21);
+            this.Emails.TabIndex = 62;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(831, 640);
+            this.ClientSize = new System.Drawing.Size(831, 684);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Tools";
@@ -464,6 +538,13 @@
         private System.Windows.Forms.RichTextBox ChaveTxt;
         private System.Windows.Forms.Button btAjustaChave;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btAtualizaNum_Serie;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox Numero_Serie;
+        private System.Windows.Forms.ComboBox NumeroSerieAtual;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox Emails;
+        private System.Windows.Forms.Label label4;
     }
 }
 
