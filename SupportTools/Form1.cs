@@ -6271,40 +6271,20 @@ namespace SupportTools
 
         }
 
-        private void DROP_AND_CREATE_NEW_DAT005(object sender, EventArgs e)
+        private void UNIFICAR_AGE03_E_AGE04(object sender, EventArgs e)
         {
             try
             {
-                DbConecction.ExecuteNonQueries($@"USE [PersonalMed]
-                                        DROP TABLE DAT005
-
-                                        USE [PersonalMed]
-                                        
-                                        SET ANSI_NULLS ON
-
-                                        SET QUOTED_IDENTIFIER ON
-
-                                        SET ANSI_PADDING ON
-
-                                        CREATE TABLE [dbo].[DAT005](
-	                                        [TABLENAME] [varchar](20) NOT NULL,
-	                                        [NEXTKEY] [int] NOT NULL,
-	                                        [TABLE] [varchar](255) NULL,
-	                                        [FIELD] [varchar](255) NULL,
-                                         CONSTRAINT [PK__DAT005__7E4D98E6] PRIMARY KEY CLUSTERED 
-                                        (
-	                                        [TABLENAME] ASC
-                                        )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-                                        ) ON [PRIMARY]
-
-
-                                        SET ANSI_PADDING OFF
+                DbConecction.ExecuteNonQueries($@"update AGE04 set
+                                                AGE03_ID = (select top 1 AGE03_ID from AGE03 where
+                                                USERNUMBER = AGE04.USERNUMBER and DATA = AGE04.DATA and INICIO = AGE04.INICIO)
+                                                where AGE03_ID is null and ATIVO = 'T'
                                         ");
 
             }
             catch (Exception)
             {
-                MessageBox.Show("NÃO EXECUTADO! - DROP_AND_CREATE_NEW_DAT005");
+                MessageBox.Show("NÃO EXECUTADO! - UNIFICADOR AGE03 E AGE04");
             }
         }
 
@@ -6626,7 +6606,7 @@ namespace SupportTools
             DbConecction.OpenConection();
             ManipularBotoes(false);
 
-            progressBar1.Maximum = 15;
+            progressBar1.Maximum = 17;
             progressBar1.Value = 0;
             label6.Refresh(); 
             label6.Text = "Progresso";
@@ -6671,7 +6651,7 @@ namespace SupportTools
             label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
-            DROP_AND_CREATE_NEW_DAT005(null, null);
+            UNIFICAR_AGE03_E_AGE04(null, null);
             progressBar1.Value += 1;
             label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
@@ -6706,13 +6686,22 @@ namespace SupportTools
             label6.Refresh();
             label6.Text = progressBar1.Value.ToString() + " arquivos executados";
 
+            AJUSTAR_TEMPO_AGENDAMENTO(null,null);
+            progressBar1.Value += 1;
+            label6.Refresh();
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados";
+
+            UNIFICAR_AGE03_E_AGE04(null, null);
+            progressBar1.Value = +1;
+            label6.Refresh();
+            label6.Text = progressBar1.Value.ToString() + " arquivos executados ";
+
             ManipularBotoes(true);
             DbConecction.CloseConnection();
         }
 
         private void btApagarDuplicados_Click(object sender, EventArgs e)
         {
-            //groupBox2.Visible = false;
             try
             {
                 DbConecction.ExecuteNonQueries($@"
@@ -6835,6 +6824,19 @@ namespace SupportTools
                 {
                     MessageBox.Show("ERRO AO ATUALIZAR NUMERO DE SERIE");
                 }
+            }
+        }
+
+        private void AJUSTAR_TEMPO_AGENDAMENTO(object sender, EventArgs e)
+        {
+            try
+            {
+                DbConecction.ExecuteNonQueries($@"UPDATE AGE03 SET DURACAO = 5 WHERE DURACAO < 5");
+
+            }
+            catch
+            {
+                MessageBox.Show("NÃO EXECUTADO! - AJUSTE TEMPO DE ATENDIMENTO/AGE03");
             }
         }
     }

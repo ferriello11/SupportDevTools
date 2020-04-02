@@ -31,6 +31,9 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
+            this.Emails = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.NumeroSerieAtual = new System.Windows.Forms.ComboBox();
             this.btAtualizaNum_Serie = new System.Windows.Forms.Button();
@@ -66,8 +69,6 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btApagaMedico = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.label4 = new System.Windows.Forms.Label();
-            this.Emails = new System.Windows.Forms.ComboBox();
             this.tabPage5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -90,6 +91,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.Emails);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
@@ -123,10 +125,37 @@
             this.panel1.TabIndex = 31;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(275, 210);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(242, 32);
+            this.button5.TabIndex = 63;
+            this.button5.Text = "AJUSTE TEMPO DE ATENDIMENTO/AGE03";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.AJUSTAR_TEMPO_AGENDAMENTO);
+            // 
+            // Emails
+            // 
+            this.Emails.FormattingEnabled = true;
+            this.Emails.Location = new System.Drawing.Point(523, 475);
+            this.Emails.Name = "Emails";
+            this.Emails.Size = new System.Drawing.Size(242, 21);
+            this.Emails.TabIndex = 62;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(523, 459);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(117, 13);
+            this.label4.TabIndex = 61;
+            this.label4.Text = "EMAIL DOS MÉDICOS";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(520, 250);
+            this.label3.Location = new System.Drawing.Point(520, 320);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(108, 13);
             this.label3.TabIndex = 60;
@@ -135,14 +164,14 @@
             // NumeroSerieAtual
             // 
             this.NumeroSerieAtual.FormattingEnabled = true;
-            this.NumeroSerieAtual.Location = new System.Drawing.Point(523, 269);
+            this.NumeroSerieAtual.Location = new System.Drawing.Point(523, 339);
             this.NumeroSerieAtual.Name = "NumeroSerieAtual";
             this.NumeroSerieAtual.Size = new System.Drawing.Size(242, 21);
             this.NumeroSerieAtual.TabIndex = 59;
             // 
             // btAtualizaNum_Serie
             // 
-            this.btAtualizaNum_Serie.Location = new System.Drawing.Point(523, 350);
+            this.btAtualizaNum_Serie.Location = new System.Drawing.Point(523, 420);
             this.btAtualizaNum_Serie.Name = "btAtualizaNum_Serie";
             this.btAtualizaNum_Serie.Size = new System.Drawing.Size(128, 23);
             this.btAtualizaNum_Serie.TabIndex = 58;
@@ -153,7 +182,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(520, 307);
+            this.label2.Location = new System.Drawing.Point(520, 377);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(170, 13);
             this.label2.TabIndex = 57;
@@ -161,14 +190,14 @@
             // 
             // Numero_Serie
             // 
-            this.Numero_Serie.Location = new System.Drawing.Point(523, 323);
+            this.Numero_Serie.Location = new System.Drawing.Point(523, 393);
             this.Numero_Serie.Name = "Numero_Serie";
             this.Numero_Serie.Size = new System.Drawing.Size(242, 20);
             this.Numero_Serie.TabIndex = 56;
             // 
             // btAjustaChave
             // 
-            this.btAjustaChave.Location = new System.Drawing.Point(16, 528);
+            this.btAjustaChave.Location = new System.Drawing.Point(16, 598);
             this.btAjustaChave.Name = "btAjustaChave";
             this.btAjustaChave.Size = new System.Drawing.Size(128, 23);
             this.btAjustaChave.TabIndex = 55;
@@ -179,7 +208,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 231);
+            this.label1.Location = new System.Drawing.Point(13, 304);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(120, 13);
             this.label1.TabIndex = 54;
@@ -187,7 +216,7 @@
             // 
             // ChaveTxt
             // 
-            this.ChaveTxt.Location = new System.Drawing.Point(16, 250);
+            this.ChaveTxt.Location = new System.Drawing.Point(16, 320);
             this.ChaveTxt.Name = "ChaveTxt";
             this.ChaveTxt.Size = new System.Drawing.Size(501, 272);
             this.ChaveTxt.TabIndex = 53;
@@ -218,7 +247,7 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.progressBar1);
             this.groupBox2.Controls.Add(this.button12);
-            this.groupBox2.Location = new System.Drawing.Point(523, 132);
+            this.groupBox2.Location = new System.Drawing.Point(523, 159);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(261, 83);
             this.groupBox2.TabIndex = 43;
@@ -244,7 +273,7 @@
             // 
             this.button12.Location = new System.Drawing.Point(6, 10);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(242, 33);
+            this.button12.Size = new System.Drawing.Size(251, 33);
             this.button12.TabIndex = 0;
             this.button12.Text = "EXECUTE ALL";
             this.button12.UseVisualStyleBackColor = true;
@@ -386,9 +415,9 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(242, 31);
             this.button8.TabIndex = 14;
-            this.button8.Text = "DROP AND CREATE NEW_DAT005";
+            this.button8.Text = "UNIFICADOR AGE03 E AGE04";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.DROP_AND_CREATE_NEW_DAT005);
+            this.button8.Click += new System.EventHandler(this.UNIFICAR_AGE03_E_AGE04);
             // 
             // tabPage2
             // 
@@ -398,7 +427,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(807, 589);
+            this.tabPage2.Size = new System.Drawing.Size(807, 644);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "Deletar Médico";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -407,7 +436,7 @@
             // 
             this.groupBox1.Controls.Add(this.rbNaoApagar);
             this.groupBox1.Controls.Add(this.rbApagar);
-            this.groupBox1.Location = new System.Drawing.Point(194, 154);
+            this.groupBox1.Location = new System.Drawing.Point(259, 155);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(229, 69);
             this.groupBox1.TabIndex = 5;
@@ -440,7 +469,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(194, 46);
+            this.comboBox1.Location = new System.Drawing.Point(259, 47);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(229, 21);
             this.comboBox1.TabIndex = 1;
@@ -448,7 +477,7 @@
             // btApagaMedico
             // 
             this.btApagaMedico.Enabled = false;
-            this.btApagaMedico.Location = new System.Drawing.Point(194, 96);
+            this.btApagaMedico.Location = new System.Drawing.Point(259, 97);
             this.btApagaMedico.Name = "btApagaMedico";
             this.btApagaMedico.Size = new System.Drawing.Size(229, 23);
             this.btApagaMedico.TabIndex = 2;
@@ -465,23 +494,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(815, 670);
             this.tabControl1.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(523, 389);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(117, 13);
-            this.label4.TabIndex = 61;
-            this.label4.Text = "EMAIL DOS MÉDICOS";
-            // 
-            // Emails
-            // 
-            this.Emails.FormattingEnabled = true;
-            this.Emails.Location = new System.Drawing.Point(523, 405);
-            this.Emails.Name = "Emails";
-            this.Emails.Size = new System.Drawing.Size(242, 21);
-            this.Emails.TabIndex = 62;
             // 
             // Form1
             // 
@@ -545,6 +557,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox Emails;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button5;
     }
 }
 
