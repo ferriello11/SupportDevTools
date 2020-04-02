@@ -6606,7 +6606,7 @@ namespace SupportTools
             DbConecction.OpenConection();
             ManipularBotoes(false);
 
-            progressBar1.Maximum = 17;
+            progressBar1.Maximum = 16;
             progressBar1.Value = 0;
             label6.Refresh(); 
             label6.Text = "Progresso";
