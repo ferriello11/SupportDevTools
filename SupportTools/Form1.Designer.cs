@@ -31,6 +31,8 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.CPF_PACIENTE = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.Emails = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -42,7 +44,6 @@
             this.btAjustaChave = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.ChaveTxt = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -91,6 +92,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.CPF_PACIENTE);
+            this.panel1.Controls.Add(this.button11);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.Emails);
             this.panel1.Controls.Add(this.label4);
@@ -102,7 +105,6 @@
             this.panel1.Controls.Add(this.btAjustaChave);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.ChaveTxt);
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.button14);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.btApagarDuplicados);
@@ -124,6 +126,26 @@
             this.panel1.Size = new System.Drawing.Size(792, 634);
             this.panel1.TabIndex = 31;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // CPF_PACIENTE
+            // 
+            this.CPF_PACIENTE.Location = new System.Drawing.Point(529, 45);
+            this.CPF_PACIENTE.Name = "CPF_PACIENTE";
+            this.CPF_PACIENTE.Size = new System.Drawing.Size(242, 35);
+            this.CPF_PACIENTE.TabIndex = 65;
+            this.CPF_PACIENTE.Text = "CPF PACIENTE";
+            this.CPF_PACIENTE.UseVisualStyleBackColor = true;
+            this.CPF_PACIENTE.Click += new System.EventHandler(this.CpfPaciente);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(16, 209);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(242, 34);
+            this.button11.TabIndex = 64;
+            this.button11.Text = "US04";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.US04);
             // 
             // button5
             // 
@@ -222,19 +244,9 @@
             this.ChaveTxt.TabIndex = 53;
             this.ChaveTxt.Text = "";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(529, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(242, 27);
-            this.button1.TabIndex = 47;
-            this.button1.Text = "CORRIGIR CPF";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.CorrigiCPF);
-            // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(529, 42);
+            this.button14.Location = new System.Drawing.Point(529, 16);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(242, 36);
             this.button14.TabIndex = 44;
@@ -268,6 +280,7 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(251, 15);
             this.progressBar1.TabIndex = 2;
+            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
             // button12
             // 
@@ -546,7 +559,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button btApagaMedico;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox ChaveTxt;
         private System.Windows.Forms.Button btAjustaChave;
         private System.Windows.Forms.Label label1;
@@ -558,6 +570,8 @@
         private System.Windows.Forms.ComboBox Emails;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button CPF_PACIENTE;
     }
 }
 
